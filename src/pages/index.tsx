@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
+import queryString, { ParsedQuery } from 'query-string'
 
 import styled from '@emotion/styled'
 
@@ -14,6 +15,7 @@ const ProfileImage = styled(GatsbyImage)`
 `
 
 type IndexPageProps = {
+  location: { search: string }
   data: {
     allMarkdownRemark: {
       edges: [
@@ -40,6 +42,7 @@ type IndexPageProps = {
 }
 
 function index({
+  location: { search },
   data: {
     allMarkdownRemark: {
       edges: [
@@ -52,11 +55,16 @@ function index({
     },
     file: {
       childImageSharp: { gatsbyImageData },
-      publicURL,
     },
   },
 }: IndexPageProps) {
-  console.log(publicURL)
+  const parsed: ParsedQuery<string> = queryString.parse(search)
+  const selectedCategory: string =
+    typeof parsed.category !== 'string' || !parsed.category
+      ? 'All'
+      : parsed.category
+
+  console.log(parsed, selectedCategory)
   return (
     <>
       <div>{`${title}, ${summary}, ${date}, ${categories}`}</div>
