@@ -13,7 +13,6 @@ module.exports = {
         allExtensions: true,
       },
     },
-    `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -66,9 +65,16 @@ module.exports = {
         ],
       },
     },
-
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          placeholder: 'blurred',
+        },
+      },
+    },
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     `gatsby-plugin-emotion`,
   ],
 }
