@@ -1,7 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: `dkmqflx's blog`,
-    description: '애니메이션, 디자인과 사용자 경험에 관심이 많습니다',
+    description: `dkmqflx's dev blog`,
+    introduction:
+      '인터랙션, 디자인 그리고 사용자 경험에 관심이 많은 프론트엔드 개발자입니다.',
     author: 'dkmqflx',
     siteUrl: 'https://dkmqflx.netlify.app',
     social: {
