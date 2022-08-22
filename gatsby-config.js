@@ -33,7 +33,14 @@ module.exports = {
         path: `${__dirname}/contents`,
       },
     },
-
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /static/,
+        },
+      },
+    },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
