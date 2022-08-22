@@ -1,20 +1,56 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { graphql } from 'gatsby'
-import Introduction from 'components/Main/Introduction'
-import { IndexPagePropsType } from 'types/main.type'
-
+import queryString, { ParsedQuery } from 'query-string'
 import Layout from 'components/Layout'
+import Introduction from 'components/Main/Introduction'
+import CategoryList from 'components/Main/CategoryList'
+import { IndexPagePropsType, CategoryListProps } from 'types/main.type'
+import { PostListItemType } from 'types/post.types'
 
 const index = ({
+  location: { search },
   data: {
     site: {
       siteMetadata: { author, introduction, social },
     },
+    allMarkdownRemark: { edges },
     file: {
       childImageSharp: { gatsbyImageData },
     },
   },
 }: IndexPagePropsType) => {
+  const parsed: ParsedQuery<string> = queryString.parse(search)
+
+  const selectedCategory: string =
+    typeof parsed.category !== 'string' || !parsed.category
+      ? 'All'
+      : parsed.category
+
+  const categoryList = useMemo(
+    () =>
+      edges.reduce(
+        (
+          list: CategoryListProps['categoryList'],
+          {
+            node: {
+              frontmatter: { categories },
+            },
+          }: PostListItemType,
+        ) => {
+          categories.forEach(category => {
+            if (list[category] === undefined) list[category] = 1
+            else list[category]++
+          })
+
+          list['All']++
+
+          return list
+        },
+        { All: 0 },
+      ),
+    [],
+  )
+
   return (
     <Layout>
       <Introduction
@@ -22,6 +58,11 @@ const index = ({
         author={author}
         introduction={introduction}
         social={social}
+      />
+
+      <CategoryList
+        selectedCategory={selectedCategory}
+        categoryList={categoryList}
       />
     </Layout>
   )
@@ -43,6 +84,22 @@ export const getPostList = graphql`
           linkedin
           twitter
           facebook
+        }
+      }
+    }
+
+    allMarkdownRemark(
+      sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
+    ) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            summary
+            date(formatString: "YYYY.MM.DD.")
+            categories
+          }
         }
       }
     }

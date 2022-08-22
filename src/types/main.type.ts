@@ -1,9 +1,11 @@
 import { IGatsbyImageData } from 'gatsby-plugin-image'
+import { PostListItemType } from './post.types'
 
 export type IndexPagePropsType = {
   location: {
     search: string
   }
+
   data: {
     site: {
       siteMetadata: {
@@ -19,6 +21,10 @@ export type IndexPagePropsType = {
           facebook: string
         }
       }
+    }
+
+    allMarkdownRemark: {
+      edges: PostListItemType[]
     }
 
     file: {
@@ -39,5 +45,12 @@ export type IntroductionProps = {
     linkedin: string
     twitter: string
     facebook: string
+  }
+}
+
+export type CategoryListProps = {
+  selectedCategory: string
+  categoryList: {
+    [key: string]: number
   }
 }
