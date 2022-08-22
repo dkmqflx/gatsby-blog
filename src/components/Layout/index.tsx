@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
-
 import Header from 'components/Common/Header'
+import Footer from 'components/Common/Footer'
 import styled from '@emotion/styled'
 
 const Wrapper = styled.div`
@@ -14,6 +14,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
     <Wrapper>
       <Header></Header>
       {children}
+      <Footer></Footer>
     </Wrapper>
   )
 }
