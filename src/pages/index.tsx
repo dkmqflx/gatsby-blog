@@ -1,21 +1,31 @@
 import React, { useMemo } from 'react'
 import { graphql } from 'gatsby'
 import queryString, { ParsedQuery } from 'query-string'
+import { IndexPagePropsType, CategoryListProps } from 'types/main.type'
+import { PostListItemType } from 'types/post.types'
 import Layout from 'components/Layout'
 import Introduction from 'components/Main/Introduction'
 import CategoryList from 'components/Main/CategoryList'
-import { IndexPagePropsType, CategoryListProps } from 'types/main.type'
-import { PostListItemType } from 'types/post.types'
+import Template from 'components/Common/Template'
+import GlobalStyle from 'components/Common/GlobalStyle'
 
 const index = ({
   location: { search },
   data: {
     site: {
-      siteMetadata: { author, introduction, social },
+      siteMetadata: {
+        title,
+        description,
+        siteUrl,
+        author,
+        introduction,
+        social,
+      },
     },
     allMarkdownRemark: { edges },
     file: {
       childImageSharp: { gatsbyImageData },
+      publicURL,
     },
   },
 }: IndexPagePropsType) => {
@@ -53,6 +63,7 @@ const index = ({
 
   return (
     <Layout>
+      <GlobalStyle />
       <Introduction
         profileImage={gatsbyImageData}
         author={author}
@@ -64,6 +75,15 @@ const index = ({
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />
+
+      <Template
+        title={title}
+        description={description}
+        url={siteUrl}
+        image={publicURL}
+      >
+        <div></div>
+      </Template>
     </Layout>
   )
 }
