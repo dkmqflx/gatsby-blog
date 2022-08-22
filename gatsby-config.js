@@ -1,9 +1,15 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    title: `dkmqflx's blog`,
+    description: '애니메이션, 디자인과 사용자 경험에 관심이 많습니다',
+    author: 'dkmqflx',
+    siteUrl: 'https://dkmqflx.netlify.app',
+    social: {
+      github: 'https://github.com/dkmqflx',
+      linkedin: '',
+      twitter: '',
+      facebook: '',
+    },
   },
   plugins: [
     {
