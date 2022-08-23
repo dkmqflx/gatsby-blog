@@ -1,11 +1,8 @@
-import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
+import { DARK_THEME, LIGHT_THEME, BLOG_THEME } from 'constants/theme'
+import styled from '@emotion/styled'
 import DarkIcon from '/static/dark.svg'
 import LightIcon from '/static/light.svg'
-
-const DARK_THEME = 'dark'
-const LIGHT_THEME = 'light'
-const BLOG_THEME = 'blog_theme'
 
 type ThemeType = 'dark' | 'light'
 
