@@ -50,6 +50,11 @@ const Template = ({
         <meta name="twitter:site" content="@사용자이름" />
         <meta name="twitter:creator" content="@사용자이름" />
 
+        <meta
+          name="google-site-verification"
+          content="ZMqhg3FRmL_SyoEv-hk5Bepv1SImbOwbqDi5fC05mM4"
+        />
+
         <html lang="ko" />
       </Helmet>
       <GlobalStyle />
