@@ -36,7 +36,7 @@ const Template = ({
 
         <meta
           name="google-site-verification"
-          content="ZMqhg3FRmL_SyoEv-hk5Bepv1SImbOwbqDi5fC05mM4"
+          content="DpgIYfwyN3y7kljaojZpEs890TfWNypVAZGU8xbalGk"
         />
 
         <meta name="description" content={description} />
