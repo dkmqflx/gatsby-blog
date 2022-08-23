@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import ProfileImage from 'components/Main/ProfileImage'
-import { IntroductionProps } from 'types/main.type'
+import { IntroductionProps } from 'types/main.types'
 import styled from '@emotion/styled'
 import Github from '/static/github.svg'
 import LinkedIn from '/static/linkedin.svg'
