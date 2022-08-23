@@ -7,6 +7,7 @@ import Layout from 'components/Layout'
 import Introduction from 'components/Main/Introduction'
 import CategoryList from 'components/Main/CategoryList'
 import Template from 'components/Common/Template'
+import PostList from 'components/Main/PostList'
 import GlobalStyle from 'components/Common/GlobalStyle'
 
 const index = ({
@@ -82,7 +83,7 @@ const index = ({
         url={siteUrl}
         image={publicURL}
       >
-        <div></div>
+        <PostList selectedCategory={selectedCategory} posts={edges} />
       </Template>
     </Layout>
   )
@@ -114,6 +115,12 @@ export const getPostList = graphql`
       edges {
         node {
           id
+          fields {
+            slug
+            readingTime {
+              text
+            }
+          }
           frontmatter {
             title
             summary
