@@ -103,5 +103,11 @@ module.exports = {
       },
     },
     'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
   ],
 }
