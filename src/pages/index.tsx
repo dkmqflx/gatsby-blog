@@ -8,7 +8,6 @@ import Introduction from 'components/Main/Introduction'
 import CategoryList from 'components/Main/CategoryList'
 import Template from 'components/Common/Template'
 import PostList from 'components/Main/PostList'
-import GlobalStyle from 'components/Common/GlobalStyle'
 
 const index = ({
   location: { search },
@@ -64,7 +63,6 @@ const index = ({
 
   return (
     <Layout>
-      <GlobalStyle />
       <Introduction
         profileImage={gatsbyImageData}
         author={author}

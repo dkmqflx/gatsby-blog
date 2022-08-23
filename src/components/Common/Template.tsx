@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react'
-import styled from '@emotion/styled'
-import Footer from 'components/Common/Footer'
 import { Helmet } from 'react-helmet'
+import Footer from 'components/Common/Footer'
+import GlobalStyle from 'components/Common/GlobalStyle'
+import styled from '@emotion/styled'
 
 type TemplateProps = {
   title: string
@@ -51,7 +52,7 @@ const Template = ({
 
         <html lang="ko" />
       </Helmet>
-
+      <GlobalStyle />
       {children}
       <Footer />
     </Container>

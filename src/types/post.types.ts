@@ -15,3 +15,30 @@ export type PostListItemType = {
     frontmatter: PostFrontmatterType
   }
 }
+
+export type PostPageItemType = {
+  node: {
+    html: string
+    frontmatter: PostFrontmatterType
+  }
+}
+
+export type PostTemplateProps = {
+  data: {
+    allMarkdownRemark: {
+      edges: PostPageItemType[]
+    }
+    file: {
+      publicURL: string
+    }
+  }
+  location: {
+    href: string
+  }
+}
+
+export type PostHeadProps = {
+  title: string
+  date: string
+  categories: string[]
+}
