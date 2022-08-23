@@ -52,11 +52,6 @@ const Template = ({
         <meta name="twitter:site" content={author} />
         <meta name="twitter:creator" content={author} />
 
-        <meta
-          name="google-site-verification"
-          content="ZMqhg3FRmL_SyoEv-hk5Bepv1SImbOwbqDi5fC05mM4"
-        />
-
         <html lang="ko" />
       </Helmet>
       <GlobalStyle />
