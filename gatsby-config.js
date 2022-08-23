@@ -1,4 +1,7 @@
 module.exports = {
+  flags: {
+    DEV_SSR: true,
+  },
   siteMetadata: {
     title: `dkmqflx's blog`,
     description: `dkmqflx's dev blog`,
