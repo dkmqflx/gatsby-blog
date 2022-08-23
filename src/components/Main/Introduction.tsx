@@ -1,5 +1,4 @@
 import React from 'react'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 import ProfileImage from 'components/Main/ProfileImage'
 import { IntroductionProps } from 'types/main.type'
