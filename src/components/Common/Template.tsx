@@ -9,6 +9,7 @@ type TemplateProps = {
   description: string
   url: string
   image: string
+  author: string
   children: ReactNode
 }
 
@@ -25,6 +26,7 @@ const Template = ({
   description,
   url,
   image,
+  author,
   children,
 }: TemplateProps) => {
   return (
@@ -47,8 +49,8 @@ const Template = ({
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
-        <meta name="twitter:site" content="@사용자이름" />
-        <meta name="twitter:creator" content="@사용자이름" />
+        <meta name="twitter:site" content={author} />
+        <meta name="twitter:creator" content={author} />
 
         <meta
           name="google-site-verification"

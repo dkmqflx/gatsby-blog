@@ -9,6 +9,9 @@ import PostUtterance from 'components/Post/PostUtterance'
 
 const PostTemplate = ({
   data: {
+    site: {
+      siteMetadata: { author },
+    },
     allMarkdownRemark: { edges },
     file: { publicURL },
   },
@@ -30,6 +33,7 @@ const PostTemplate = ({
         description={summary}
         image={publicURL}
         url={href}
+        author={author}
       >
         <PostHead title={title} date={date} categories={categories} />
         <PostContent html={html} />
@@ -43,6 +47,12 @@ export default PostTemplate
 
 export const queryMarkdownDataBySlug = graphql`
   query queryMarkdownDataBySlug($slug: String) {
+    site {
+      siteMetadata {
+        author
+      }
+    }
+
     allMarkdownRemark(filter: { fields: { slug: { eq: $slug } } }) {
       edges {
         node {

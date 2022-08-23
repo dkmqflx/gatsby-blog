@@ -25,6 +25,12 @@ export type PostPageItemType = {
 
 export type PostTemplateProps = {
   data: {
+    site: {
+      siteMetadata: {
+        author: string
+      }
+    }
+
     allMarkdownRemark: {
       edges: PostPageItemType[]
     }

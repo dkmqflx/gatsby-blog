@@ -80,6 +80,7 @@ const index = ({
         description={description}
         url={siteUrl}
         image={publicURL}
+        author={author}
       >
         <PostList selectedCategory={selectedCategory} posts={edges} />
       </Template>
