@@ -14,7 +14,7 @@ const Dark = styled(DarkIcon)`
   cursor: pointer;
 `
 
-const Toggle = () => {
+const ThemeSwitch = () => {
   const [theme, setTheme] = useState<string | null>(null)
 
   const toggleTheme = (theme: ThemeType) => {
@@ -55,4 +55,4 @@ const Toggle = () => {
   )
 }
 
-export default Toggle
+export default ThemeSwitch
