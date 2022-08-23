@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { graphql } from 'gatsby'
 import queryString, { ParsedQuery } from 'query-string'
-import { IndexPagePropsType, CategoryListProps } from 'types/main.type'
+import { IndexPagePropsType, CategoryListProps } from 'types/main.types'
 import { PostListItemType } from 'types/post.types'
 import Layout from 'components/Layout'
 import Introduction from 'components/Main/Introduction'
