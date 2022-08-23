@@ -95,5 +95,12 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-emotion`,
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: 'https://dkmqflx.netlify.app',
+        stripQueryString: true,
+      },
+    },
   ],
 }
