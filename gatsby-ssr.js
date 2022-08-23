@@ -1,11 +1,5 @@
 export const onRenderBody = ({ setPreBodyComponents }) =>
   setPreBodyComponents([
-    <head key="google">
-      <meta
-        name="google-site-verification"
-        content="ZMqhg3FRmL_SyoEv-hk5Bepv1SImbOwbqDi5fC05mM4"
-      />
-    </head>,
     <script
       key="theme"
       dangerouslySetInnerHTML={{

@@ -34,6 +34,11 @@ const Template = ({
       <Helmet>
         <title>{title}</title>
 
+        <meta
+          name="google-site-verification"
+          content="ZMqhg3FRmL_SyoEv-hk5Bepv1SImbOwbqDi5fC05mM4"
+        />
+
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
