@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import styled from '@emotion/styled'
+import ThemeSwitch from './ThemeSwitch'
 
 const HeaderWrapper = styled.header`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   height: 80px;
 `
@@ -30,6 +32,7 @@ const Header = () => {
       <Link to="/">
         <h1>{`${author}'s Blog`}</h1>
       </Link>
+      <ThemeSwitch />
     </HeaderWrapper>
   )
 }

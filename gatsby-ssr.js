@@ -1,9 +1,24 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/ssr-apis/
- */
+export const onRenderBody = ({ setPreBodyComponents }) =>
+  setPreBodyComponents([
+    <script
+      key="theme"
+      dangerouslySetInnerHTML={{
+        __html: `(() => {
+        try {
+          const blogTheme =
+            localStorage.getItem('blog_theme') 
 
-exports.onRenderBody = ({ setHtmlAttributes }) => {
-  setHtmlAttributes({ lang: `en` })
-}
+          const prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+
+          const setTheme = (theme) => {
+            document.body.classList.add(theme)
+            localStorage.setItem('blog_theme', theme) 
+          }
+
+          setTheme(blogTheme || prefersColorScheme)
+
+        } catch (error) {}
+      })()`,
+      }}
+    />,
+  ])
