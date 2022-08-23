@@ -1,10 +1,11 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { PostTemplateProps } from 'types/post.types'
+import Layout from 'components/Layout'
 import Template from 'components/Common/Template'
 import PostHead from 'components/Post/PostHead'
 import PostContent from 'components/Post/PostContent'
-import Layout from 'components/Layout'
+import PostUtterance from 'components/Post/PostUtterance'
 
 const PostTemplate = ({
   data: {
@@ -32,6 +33,7 @@ const PostTemplate = ({
       >
         <PostHead title={title} date={date} categories={categories} />
         <PostContent html={html} />
+        <PostUtterance />
       </Template>
     </Layout>
   )
