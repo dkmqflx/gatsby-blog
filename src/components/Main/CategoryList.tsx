@@ -7,8 +7,8 @@ import React, {
   useState,
 } from 'react'
 import { Link } from 'gatsby'
+import { CategoryListProps } from 'types/main.types'
 import styled from '@emotion/styled'
-import { CategoryListProps } from 'types/main.type'
 
 type CategoryItemProps = {
   active: boolean
