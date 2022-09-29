@@ -22,14 +22,14 @@ const ThemeSwitch = () => {
       case DARK_THEME:
         localStorage.setItem(BLOG_THEME, DARK_THEME)
         setTheme(DARK_THEME)
-        document.body.classList.add('dark')
-        document.body.classList.remove('light')
+        document.body.classList.add(DARK_THEME)
+        document.body.classList.remove(LIGHT_THEME)
         break
       case LIGHT_THEME:
         localStorage.setItem(BLOG_THEME, LIGHT_THEME)
         setTheme(LIGHT_THEME)
-        document.body.classList.add('light')
-        document.body.classList.remove('dark')
+        document.body.classList.add(LIGHT_THEME)
+        document.body.classList.remove(DARK_THEME)
         break
       default:
         break
@@ -47,9 +47,9 @@ const ThemeSwitch = () => {
   return (
     <>
       {theme === DARK_THEME ? (
-        <Light onClick={() => toggleTheme('light')}>To Light</Light>
+        <Light onClick={() => toggleTheme(LIGHT_THEME)}>To Light</Light>
       ) : (
-        <Dark onClick={() => toggleTheme('dark')}>To Dark</Dark>
+        <Dark onClick={() => toggleTheme(DARK_THEME)}>To Dark</Dark>
       )}
     </>
   )
