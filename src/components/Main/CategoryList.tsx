@@ -93,7 +93,7 @@ const CategoryList = ({
           to={`/?category=${name}`}
           active={name === selectedCategory}
         >
-          #{name}({count})
+          {name}({count})
         </CategoryLink>
       ))}
 
