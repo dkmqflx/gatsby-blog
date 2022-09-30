@@ -81,6 +81,7 @@ module.exports = {
             },
           },
           `gatsby-remark-reading-time`,
+          `gatsby-remark-embedder`,
         ],
       },
     },
