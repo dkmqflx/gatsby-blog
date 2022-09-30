@@ -23,25 +23,6 @@ const defaultStyle = css`
     text-decoration: none;
     cursor: pointer;
   }
-
-  body {
-    &.light {
-      background-color: #f5f5f5;
-      color: #161616;
-      --secondary-color: #6c6c6c;
-      --button-color: #ececec;
-      --border-color: #e5e5e5;
-    }
-
-    &.dark {
-      background-color: #202122;
-      color: #fff;
-      --secondary-color: #bec1c5;
-      --button-color: #303134;
-      --border-color: #3d4043;
-    }
-    transition: background-color 0.3s linear;
-  }
 `
 
 const GlobalStyle = () => {
