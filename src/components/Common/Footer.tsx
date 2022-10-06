@@ -5,8 +5,8 @@ import styled from '@emotion/styled'
 const Wrapper = styled.footer`
   display: flex;
   justify-content: center;
-  padding: 40px 0;
-  font-size: 14px;
+  padding: 2.5em 0;
+  font-size: 0.875rem;
 `
 
 const Footer = () => {
