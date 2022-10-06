@@ -5,7 +5,7 @@ import { PostHeadProps } from 'types/post.types'
 const PostHeadWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 40px 0;
+  padding: 2.5em 0;
   border-bottom: 1px solid #e5e5e5;
 `
 
@@ -17,15 +17,14 @@ const Title = styled.h1`
   white-space: normal;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: bold;
 `
 const PostData = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
-  font-size: 16px;
+  margin-top: 0.625em;
   color: var(--secondary-color); ;
 `
 
