@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: 100%;
   word-break: break-word;
-  margin: 20px 0;
+  margin: 1.25em 0;
 `
 
 const Author = styled.div`
@@ -26,11 +26,11 @@ const Profile = styled.div`
 `
 
 const IntroductionWrapper = styled.div`
-  margin: 4px 0 10px 0;
+  margin: 0.25em 0 0.625em 0;
 `
 const SocalLink = styled(Link)`
   &:not(:first-of-type) {
-    margin-left: 8px;
+    margin-left: 0.5em;
   }
 `
 
