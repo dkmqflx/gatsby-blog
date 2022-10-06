@@ -13,19 +13,19 @@ const NotFoundPageWrapper = styled.div`
 `
 
 const NotFoundText = styled.div`
-  font-size: 150px;
+  font-size: 9.375rem;
   font-weight: 700;
 `
 
 const NotFoundDescription = styled.div`
-  font-size: 24px;
+  font-size: 1.5rem;
   text-align: center;
   line-height: 1.2;
 `
 
 const GoToMainButton = styled(Link)`
-  margin-top: 30px;
-  font-size: 20px;
+  margin-top: 1.875em;
+  font-size: 1.25rem;
   text-decoration: underline;
 
   &:hover {
