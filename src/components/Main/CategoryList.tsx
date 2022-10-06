@@ -23,22 +23,22 @@ type GatsbyLinkProps = {
 const CategoryListWrapper = styled.div<{ more: boolean }>`
   display: flex;
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 2.5em;
 
   flex-wrap: wrap;
   overflow: hidden;
-  height: 40px;
+  height: 2.5rem;
 `
 
 const CategoryLink = styled(({ active, ...props }: GatsbyLinkProps) => (
   <Link {...props} />
 ))<CategoryItemProps>`
   background-color: var(--button-color);
-  font-size: 14px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 4px;
+  font-size: 0.875rem;
+  margin-right: 0.625em;
+  margin-bottom: 0.625em;
+  padding: 0.625em;
+  border-radius: 0.25em;
   font-weight: ${({ active }) => (active ? '700' : '400')};
 
   &:last-of-type {
@@ -52,7 +52,7 @@ const Icon = styled.span`
   cursor: pointer;
   color: var(--secondary-color);
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.25rem;
 `
 
 const CategoryList = ({
@@ -66,20 +66,31 @@ const CategoryList = ({
 
   const toggle = useCallback(() => {
     setMore(more => !more)
-    if (categoryRef.current) {
+
+    if (typeof window !== 'undefined' && categoryRef.current) {
+      const fontSize = Number(
+        window
+          .getComputedStyle(document.body)
+          .getPropertyValue('font-size')
+          .match(/\d+/)![0],
+      )
+
       categoryRef.current!.style.height =
-        categoryRef.current?.style.height === '40px'
-          ? `${categoryRef.current.scrollHeight}px`
-          : '40px'
+        categoryRef.current?.style.height === '2.5rem'
+          ? `${categoryRef.current.scrollHeight * (1 / fontSize)}rem`
+          : '2.5rem'
     }
   }, [])
+
+  // console.log(categoryRef.current)
 
   useEffect(() => {
     if (
       categoryRef.current &&
       categoryRef.current.clientHeight < categoryRef.current.scrollHeight
     ) {
-      categoryRef.current.style.height = '40px'
+      categoryRef.current.style.height = '2.5rem'
+
       categoryRef.current.style.transition = 'all 0.3s linear'
       setVisible(true)
     }
