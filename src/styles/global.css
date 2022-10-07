@@ -7,7 +7,7 @@ body.light {
   color: #161616;
   --secondary-color: #6c6c6c;
   --button-color: #ececec;
-  --border-color: #e5e5e5;
+  --border-color: #c6c3c3ca;
 }
 
 body.dark {
