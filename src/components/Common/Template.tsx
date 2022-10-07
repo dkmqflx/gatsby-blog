@@ -19,6 +19,7 @@ const Container = styled.main`
   height: 100vh;
   width: 100%;
   margin: 0 auto;
+  padding: 0 1em;
 `
 
 const Template = ({

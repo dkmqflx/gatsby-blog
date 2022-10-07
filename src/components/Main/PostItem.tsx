@@ -19,6 +19,10 @@ const PostItemWrapper = styled(Link)`
   &:first-of-type {
     border-top: 1px solid var(--border-color);
   }
+
+  @media (max-width: 23.438rem) {
+    padding: 1.5em 0;
+  }
 `
 
 const TitleWrapper = styled.div`
@@ -33,12 +37,20 @@ const Title = styled.div`
   margin-right: 1.5em;
   font-size: 1.375rem;
   font-weight: 600;
+
+  @media (max-width: 23.438rem) {
+    font-size: 1.2rem;
+  }
 `
 
 const Info = styled.div`
   color: var(--secondary-color);
   font-size: 0.875rem;
   min-width: 10%;
+
+  @media (max-width: 23.438rem) {
+    font-size: 0.75rem;
+  }
 `
 
 const Summary = styled.div`
@@ -53,6 +65,10 @@ const Summary = styled.div`
   opacity: 0.8;
   margin-top: 1.125em;
   color: var(--secondary-color);
+
+  @media (max-width: 23.438rem) {
+    font-size: 0.75rem;
+  }
 `
 
 const PostItem = ({
