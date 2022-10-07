@@ -7,16 +7,15 @@ const MarkdownRenderer = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
-  padding: 60px 0;
+  padding: 1.25em 0;
   word-break: break-all;
 
   // Markdown Style
   line-height: 1.8;
-  font-size: 16px;
 
   // Apply Padding Attribute to All Elements
   p {
-    padding: 4px 0;
+    padding: 0.25em 0;
   }
 
   // Adjust Heading Element Style
@@ -24,13 +23,12 @@ const MarkdownRenderer = styled.div`
   h2,
   h3 {
     font-weight: 700;
-    margin-bottom: 20px;
   }
 
   * + h1,
   * + h2,
   * + h3 {
-    margin-top: 40px;
+    margin-top: 1.25em;
   }
 
   hr + h1,
@@ -40,36 +38,35 @@ const MarkdownRenderer = styled.div`
   }
 
   h1 {
-    font-size: 30px;
+    font-size: 1.75rem;
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   h3 {
-    font-size: 20px;
+    font-size: 1.25rem;
   }
 
   // Adjust Quotation Element Style
   blockquote {
-    margin: 30px 0;
-    padding: 4px 14px;
-    border-left: 2px solid #000000;
+    margin: 1.25em 0;
+    padding: 0.25em 0.875em;
+    border-left: 0.125em solid #000000;
     font-weight: 700;
   }
 
   // Adjust List Element Style
   ol,
   ul {
-    margin-left: 20px;
-    padding: 30px 0;
+    margin: 1.25em 0 1.25em 1.25em;
   }
 
   // Adjust Horizontal Rule style
   hr {
     border: 1px solid #e5e5e5;
-    margin: 50px 0;
+    margin: 1.875em 0;
   }
 
   // Adjust Link Element Style
@@ -80,13 +77,13 @@ const MarkdownRenderer = styled.div`
 
   // Adjust Code Style
   pre[class*='language-'] {
-    margin: 30px 0;
-    padding: 14px;
-    font-size: 14px;
+    margin: 1.25em 0;
+    padding: 0.875em;
+    font-size: 0.875rem;
 
     ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 3px;
+      background: #ffffff80;
+      border-radius: 0.1875em;
     }
   }
 
@@ -96,22 +93,22 @@ const MarkdownRenderer = styled.div`
   }
 
   // Markdown Responsive Design
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     width: 100%;
-    padding: 80px 20px;
+    padding: 1.25em 1em;
     line-height: 1.6;
-    font-size: 14px;
+    font-size: 0.875rem;
 
     h1 {
-      font-size: 23px;
+      font-size: 1.5rem;
     }
 
     h2 {
-      font-size: 20px;
+      font-size: 1.25rem;
     }
 
     h3 {
-      font-size: 17px;
+      font-size: 1rem;
     }
 
     img {
@@ -119,7 +116,7 @@ const MarkdownRenderer = styled.div`
     }
 
     hr {
-      margin: 50px 0;
+      margin: 1.25em 0;
     }
   }
 `
