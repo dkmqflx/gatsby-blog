@@ -92,6 +92,11 @@ const MarkdownRenderer = styled.div`
     tab-size: 2;
   }
 
+  code[class*='language-text'] {
+    color: #e53a40;
+    background-color: var(--text-background-color);
+  }
+
   // Markdown Responsive Design
   @media (max-width: 48rem) {
     width: 100%;

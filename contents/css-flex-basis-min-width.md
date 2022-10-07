@@ -8,6 +8,15 @@ summary: 'flex-basis가 적용되지 않을 때 해결하는 방법
 
 - 아래는 `flex-basis` 속성을 사용해서 flex item의 크기를 조절하는 코드입니다.
 
+```javascript
+sdfas
+fd
+sf
+s
+adf
+console.log(1)
+```
+
 <iframe src="https://codesandbox.io/embed/boring-fog-gksdxi?fontsize=14&hidenavigation=1&theme=dark&view=split?initialpath=index.html?module=index.html"
      style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
      title="boring-fog-gksdxi"

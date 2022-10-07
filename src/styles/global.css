@@ -8,6 +8,7 @@ body.light {
   --secondary-color: #6c6c6c;
   --button-color: #ececec;
   --border-color: #c6c3c3ca;
+  --text-background-color: #dfdddd;
 }
 
 body.dark {
@@ -16,4 +17,5 @@ body.dark {
   --secondary-color: #bec1c5;
   --button-color: #303134;
   --border-color: #3d4043;
+  --text-background-color: #908d8d1e;
 }
