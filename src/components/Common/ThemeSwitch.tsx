@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { DARK_THEME, LIGHT_THEME, BLOG_THEME } from 'constants/theme'
+import React from 'react'
+import { DARK_THEME, LIGHT_THEME } from 'constants/theme'
 import styled from '@emotion/styled'
 import DarkIcon from '/static/dark.svg'
 import LightIcon from '/static/light.svg'
-
-type ThemeType = 'dark' | 'light'
+import useTheme from 'hooks/useTheme'
 
 const Light = styled(LightIcon)`
   cursor: pointer;
@@ -15,32 +14,7 @@ const Dark = styled(DarkIcon)`
 `
 
 const ThemeSwitch = () => {
-  const [theme, setTheme] = useState<string | null>(null)
-
-  const toggleTheme = (theme: ThemeType) => {
-    switch (theme) {
-      case DARK_THEME:
-        localStorage.setItem(BLOG_THEME, DARK_THEME)
-        setTheme(DARK_THEME)
-        document.body.classList.add(DARK_THEME)
-        document.body.classList.remove(LIGHT_THEME)
-        break
-      case LIGHT_THEME:
-        localStorage.setItem(BLOG_THEME, LIGHT_THEME)
-        setTheme(LIGHT_THEME)
-        document.body.classList.add(LIGHT_THEME)
-        document.body.classList.remove(DARK_THEME)
-        break
-      default:
-        break
-    }
-  }
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setTheme(document.body.classList.value)
-    }
-  }, [])
+  const { theme, toggleTheme } = useTheme()
 
   if (!theme) return null
 
