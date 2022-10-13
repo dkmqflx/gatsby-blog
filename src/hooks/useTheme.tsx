@@ -4,13 +4,13 @@ import { atom, useRecoilState } from 'recoil'
 
 type ThemeType = 'dark' | 'light'
 
-export const initialRecoilTheme = atom({
+export const initialTheme = atom({
   key: 'theme',
   default: '',
 })
 
 const useTheme = () => {
-  const [recoilTheme, setRecoilTheme] = useRecoilState(initialRecoilTheme)
+  const [theme, setTheme] = useRecoilState(initialTheme)
 
   const toggleTheme = (theme: ThemeType) => {
     switch (theme) {
@@ -19,14 +19,14 @@ const useTheme = () => {
         document.body.classList.add(DARK_THEME)
         document.body.classList.remove(LIGHT_THEME)
 
-        setRecoilTheme(DARK_THEME)
+        setTheme(DARK_THEME)
         break
       case LIGHT_THEME:
         localStorage.setItem(BLOG_THEME, LIGHT_THEME)
         document.body.classList.add(LIGHT_THEME)
         document.body.classList.remove(DARK_THEME)
 
-        setRecoilTheme(LIGHT_THEME)
+        setTheme(LIGHT_THEME)
 
         break
       default:
@@ -36,11 +36,11 @@ const useTheme = () => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setRecoilTheme(document.body.classList.value)
+      setTheme(document.body.classList.value)
     }
   }, [])
 
-  return { theme: recoilTheme, toggleTheme }
+  return { theme, toggleTheme }
 }
 
 export default useTheme

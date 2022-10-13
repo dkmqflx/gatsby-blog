@@ -1,4 +1,4 @@
-import { initialRecoilTheme } from 'hooks/useTheme'
+import { initialTheme } from 'hooks/useTheme'
 import React, { MutableRefObject, useEffect, useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 import { DARK_THEME } from 'constants/theme'
@@ -21,7 +21,7 @@ const PostUtterance = () => {
   const element: MutableRefObject<HTMLDivElement | null> =
     useRef<HTMLDivElement | null>(null)
 
-  const theme = useRecoilValue(initialRecoilTheme)
+  const theme = useRecoilValue(initialTheme)
 
   const createUtterance = () => {
     const utterances: HTMLScriptElement = document.createElement('script')
