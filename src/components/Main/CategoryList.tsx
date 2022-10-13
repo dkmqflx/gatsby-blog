@@ -24,6 +24,7 @@ const CategoryListWrapper = styled.div<{ more: boolean }>`
   display: flex;
   position: relative;
   margin-bottom: 2.5em;
+  padding: 0 1em;
 
   flex-wrap: wrap;
   overflow: hidden;
@@ -48,7 +49,7 @@ const CategoryLink = styled(({ active, ...props }: GatsbyLinkProps) => (
 
 const Icon = styled.span`
   position: absolute;
-  right: 0;
+  right: 1em;
   cursor: pointer;
   color: var(--secondary-color);
   font-weight: bold;
@@ -81,8 +82,6 @@ const CategoryList = ({
           : '2.5rem'
     }
   }, [])
-
-  // console.log(categoryRef.current)
 
   useEffect(() => {
     if (

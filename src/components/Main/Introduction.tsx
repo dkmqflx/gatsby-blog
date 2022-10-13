@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   width: 100%;
   word-break: break-word;
   margin: 1.25em 0;
+  padding: 0 1em;
 `
 
 const Author = styled.div`
