@@ -7,6 +7,16 @@ const PostHeadWrapper = styled.div`
   flex-direction: column;
   padding: 2.5em 0;
   border-bottom: 1px solid #e5e5e5;
+
+  @media (max-width: 23.438rem) {
+    /* width: 100%; */
+    /* padding: 1em; */
+    font-size: 0.875rem;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
 `
 
 const Title = styled.h1`
