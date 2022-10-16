@@ -1,105 +1,268 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's default starter
-</h1>
+## 블로그를 만들게 된 계기
 
-Kick off your project with this default boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+- 기존에는 Jekyll 기반으로 만든 블로그를 사용하고 있었습니다.
+- Jekyll은 Ruby 기반으로 Ruby 언어에 대한 지식이 없었기 때문에 새로운 기능을 추가하거나 UI를 수정하는데 있어 어려움이 있었습니다.
+- 이러한 점 때문에 익숙한 리액트로 블로그를 개발할 수 있는 정적 사이트 생성 프레임워크인 `Gatsby`를 사용해서 새로운 블로그를 만들었습니다.
+- 그리고 블로그를 만들기에 앞서 [Figma](https://www.figma.com/file/Zvs6EwHvq7VKxmk6H3LfKx/%EB%B8%94%EB%A1%9C%EA%B7%B8-UI?node-id=0%3A1)를 통해 기본적인 디자인 작업을 하였고 이를 기반으로 개발을 하였습니다
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.com/docs/gatsby-starters/)._
 
-## 🚀 Quick start
+<br/>
 
-1.  **Create a Gatsby site.**
 
-    Use the Gatsby CLI ([install instructions](https://www.gatsbyjs.com/docs/tutorial/part-0/#gatsby-cli)) to create a new site, specifying the default starter.
+## 블로그를 만들면서 고민했던 점들
 
-    ```shell
-    # create a new Gatsby site using the default starter
-    gatsby new my-default-starter https://github.com/gatsbyjs/gatsby-starter-default
-    ```
+### 1. 다크모드
 
-1.  **Start developing.**
+- 다크모드 같은 경우 전력 소모 및 눈의 피로를 줄여준다는 점에서 보편적인 기능으로 자리잡고 있습니다.
+- 이전 블로그에는 다크모드 기능이 없었기 때문에 새로 블로그를 개발하면서 다크모드 기능을 구현하였습니다.
 
-    Navigate into your new site’s directory and start it up.
+- `window.matchMedia()` 함수와 `prefers-color-scheme` 속성을 사용해서 사용자의 시스템 설정에 따라 다크모드 또는 라이트모드가 적용되도록 하였고 테마 값을 로컬 스토리지에 값을 저장해주는 방식으로 구현했습니다
 
-    ```shell
-    cd my-default-starter/
-    gatsby develop
-    ```
+```jsx
+// gatsby-ssr.js
 
-1.  **Open the source code and start editing!**
+// Called after every page Gatsby server renders while building HTML
+export const onRenderBody = ({ setPreBodyComponents }) =>
+  setPreBodyComponents([
+    <script
+      key="theme"
+      dangerouslySetInnerHTML={{
+        __html: `(() => {
+        try {
+          const blogTheme =
+            localStorage.getItem('blog_theme') 
 
-    Your site is now running at `http://localhost:8000`!
+          const prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby Tutorial](https://www.gatsbyjs.com/docs/tutorial/part-4/#use-graphiql-to-explore-the-data-layer-and-write-graphql-queries)._
+          const setTheme = (theme) => {
+            document.body.classList.add(theme)
+            localStorage.setItem('blog_theme', theme) 
+          }
 
-    Open the `my-default-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+          setTheme(blogTheme || prefersColorScheme)
 
-## 🚀 Quick start (Gatsby Cloud)
+        } catch (error) {}
+      })()`,
+      }}
+    />,
+  ])
+```
 
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
+- 처음에는 `Emotion`에서 제공하는 `Global` 컴포넌트안에 클래스를 정의한 다음 라이트모드, 다크모드 스타일이 적용되도록 하였습니다
+- 하지만 다크모드로 설정한 다음 새로고침을 하면 라이트모드가 적용된 후 다크모드가 적용되면서 깜빡이는 현상이 나타났는데 그 이유는 사용자의 설정을 확인하고 적용하기 전에 HTML이 생성되었기 때문입니다.
+- 즉, 기본 테마를 라이트모드로 설정한 후 배포를 했기 때문에 라이트모드가 우선적으로 적용된 다음 사용자가 설정한 다크모드가 적용되었던 것입니다.
+- 따라서 이 문제를 해결하기 위해 `Emotion`의 `Global` 컴포넌트 대신 global.css 파일에 CSS 커스텀 속성(CSS Custom Properties)을 정의해주었고 필요한 곳에서 해당 값들을 사용하는 방식으로 문제를 처리했습니다.
 
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-default)
+```css
+/* styles/glboal.css */
 
-## 🧐 What's inside?
+body {
+  transition: background-color 0.3s linear;
+}
 
-A quick look at the top-level files and directories you'll see in a Gatsby project.
+body.light {
+  background-color: #f5f5f5;
+  color: #161616;
+  --secondary-color: #6c6c6c;
+  --button-color: #ececec;
+  --border-color: #c6c3c3ca;
+  --text-background-color: #dfdddd;
+}
 
-    .
-    ├── node_modules
-    ├── src
-    ├── .gitignore
-    ├── .prettierrc
-    ├── gatsby-browser.js
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── gatsby-ssr.js
-    ├── LICENSE
-    ├── package-lock.json
-    ├── package.json
-    └── README.md
+body.dark {
+  background-color: #202122;
+  color: #fff;
+  --secondary-color: #bec1c5;
+  --button-color: #303134;
+  --border-color: #3d4043;
+  --text-background-color: #908d8d1e;
+}
+```
 
-1.  **`/node_modules`**: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
+<br/>
 
-2.  **`/src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+- 다크모드를 구현하는데 있어 또 하나 고려해야할 점은 바로 댓글 기능에서도 다크모드가 적용되야 하는 것이었습니다.
+- `Utterance`를 사용해서 댓글을 달 수 있는 기능을 구현했는데, 사용자가 다크모드를 선택했을 때 그에 맞게 테마가 바뀌어야 했습니다.
+- 여러가지 방법이 있었지만 블로그를 개발하는 것에 학습의 목적 또한 있었기 때문에 이번 기회에 `Recoil`을 학습하고 적용해보았습니다.
+- 아래처럼 `Recoil`을 사용해서 전역 상태를 관리하는 Custom hook을 정의해주었습니다.
+- Header 컴포넌트에 위치한 값을 전구 모양의 아이콘을 클릭했을 때 전역 상태의 값이 바뀌고, 그에 따라 Utterance의 테마가 바뀌도록 처리하였습니다.
 
-3.  **`.gitignore`**: This file tells git which files it should not track / not maintain a version history for.
+```jsx
+// hooks/useTheme.tsx
 
-4.  **`.prettierrc`**: This is a configuration file for [Prettier](https://prettier.io/). Prettier is a tool to help keep the formatting of your code consistent.
+import { useEffect } from 'react'
+import { DARK_THEME, LIGHT_THEME, BLOG_THEME } from 'constants/theme'
+import { atom, useRecoilState } from 'recoil'
 
-5.  **`gatsby-browser.js`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+type ThemeType = 'dark' | 'light'
 
-6.  **`gatsby-config.js`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/) for more detail).
+export const initialTheme = atom({
+  key: 'theme',
+  default: '',
+})
 
-7.  **`gatsby-node.js`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+const useTheme = () => {
+  const [theme, setTheme] = useRecoilState(initialTheme)
 
-8.  **`gatsby-ssr.js`**: This file is where Gatsby expects to find any usage of the [Gatsby server-side rendering APIs](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-ssr/) (if any). These allow customization of default Gatsby settings affecting server-side rendering.
+  const toggleTheme = (theme: ThemeType) => {
+    switch (theme) {
+      case DARK_THEME:
+        localStorage.setItem(BLOG_THEME, DARK_THEME)
+        document.body.classList.add(DARK_THEME)
+        document.body.classList.remove(LIGHT_THEME)
 
-9.  **`LICENSE`**: This Gatsby starter is licensed under the 0BSD license. This means that you can see this file as a placeholder and replace it with your own license.
+        setTheme(DARK_THEME)
+        break
+      case LIGHT_THEME:
+        localStorage.setItem(BLOG_THEME, LIGHT_THEME)
+        document.body.classList.add(LIGHT_THEME)
+        document.body.classList.remove(DARK_THEME)
 
-10. **`package-lock.json`** (See `package.json` below, first). This is an automatically generated file based on the exact versions of your npm dependencies that were installed for your project. **(You won’t change this file directly).**
+        setTheme(LIGHT_THEME)
 
-11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
+        break
+      default:
+        break
+    }
+  }
 
-12. **`README.md`**: A text file containing useful reference information about your project.
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setTheme(document.body.classList.value)
+    }
+  }, [])
 
-## 🎓 Learning Gatsby
+  return { theme, toggleTheme }
+}
 
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
+export default useTheme
+```
 
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
+```jsx
+// PostUtterance.tsx
 
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).** In particular, check out the _Guides_, _API Reference_, and _Advanced Tutorials_ sections in the sidebar.
+...
 
-## 💫 Deploy
+const theme = useRecoilValue(initialTheme) // 전역 상태 값을 받아온다
 
-[Build, Deploy, and Host On The Only Cloud Built For Gatsby](https://www.gatsbyjs.com/products/cloud/)
+const changeUtterance = () => {
+    const message = {
+      type: 'set-theme',
+      theme: theme === DARK_THEME ? 'github-dark' : 'github-light', // 사용자가 설정한 모드에 따라 Utterance 테마 적용되도록 처리
+    }
+    const iframe = document.querySelector<HTMLIFrameElement>(UTTERANCE_CLASS)
 
-Gatsby Cloud is an end-to-end cloud platform specifically built for the Gatsby framework that combines a modern developer experience with an optimized, global edge network.
+    iframe?.contentWindow?.postMessage(message, src)
+  }
 
-<!-- AUTO-GENERATED-CONTENT:END -->
+...
+```
+
+---
+
+<br/>
+
+### 2.무한 스크롤
+
+- 이전 블로그 같은 경우에는 전에 작성된 글을 보기 위해서는 버튼을 눌러 다른 페이지로 이동하는 방식이었습니다.
+- 하지만 추가 클릭 없이 새로운 포스트를 확인할 수 있기 때문에 더 나은 사용성을 제공할 수 있다는 점에서 `IntersectionObserver`을 사용해서 무한 스크롤 기능을 적용해주었습니다.
+- 아래는 무한 스크롤 기능을 위한 Custom hook으로 return 값 중 하나인 `postList` 에서 새롭게 불러온 글들이 반환됩니다.
+
+```jsx
+// hooks/useInfiniteScroll.tsx
+
+import { MutableRefObject, useState, useEffect, useRef, useMemo } from 'react'
+import { PostListItemType } from 'types/post.types'
+
+export type useInfiniteScrollType = {
+  containerRef: MutableRefObject<HTMLDivElement | null>
+  postList: PostListItemType[]
+}
+
+const NUMBER_OF_ITEMS_PER_PAGE = 10 // 페이지당 사용자에게 보여질 블로그 글 갯수
+
+const useInfiniteScroll = function (
+  selectedCategory: string,
+  posts: PostListItemType[],
+): useInfiniteScrollType {
+  const containerRef: MutableRefObject<HTMLDivElement | null> =
+    useRef<HTMLDivElement>(null)
+
+  const observer: MutableRefObject<IntersectionObserver | null> =
+    useRef<IntersectionObserver>(null)
+
+  const [count, setCount] = useState<number>(1) // 무한 스크롤을 통해 새로운 데이터 불러올 때 마다 값을 증가시켜주기 위한 state
+
+	// category에 의해 선택되는 post list, 사용자에게 보여지는 글 목록
+  const postListByCategory = useMemo<PostListItemType[]>(
+    () =>
+      posts.filter(
+        ({
+          node: {
+            frontmatter: { categories },
+          },
+        }: PostListItemType) =>
+          selectedCategory !== 'All'
+            ? categories.includes(selectedCategory)
+            : true,
+				// 카테고리가 All이면 그냥 true로 모든 포스트 보여지도록
+				// All이 아니면 해당 카테고리에 해당하는 포스트만 보여지도록
+      ),
+    [selectedCategory],
+  )
+
+  useEffect(() => {
+    observer.current = new IntersectionObserver((entries, observer) => {
+			// observer는 관측대상으로 단 하나의 요소만 관측할 것이기 때문에 관측 요소 배열 파라미터에 해당하는 entries 인자에는 하나의 데이터만 존재한다.
+			// entries에는 entries는 IntersectionObserverEntry 인스턴스의 배열로, 관측하는 요소들의 정보가 들어있다
+      
+			if (!entries[0].isIntersecting) return
+			// isIntersecting이라는 프로퍼티를 통해 화면에 노출되었는지를 확인할 수 있다.
+			// isIntersecting: 관찰 대상의 교차 상태(Boolean)
+			// 포스트에서 가장 마지막 요소를 관측하고 있는데 화면에 보이지 않으면 아래 코드 실행하지 않고 종료
+
+			// 만약 화면에 보인다면 그 순간 아래 코드 실행해준다
+      setCount(value => value + 1)
+      observer.unobserve(entries[0].target) // 타겟 요소 관측 중단
+    })
+  }, [])
+
+  useEffect(() => setCount(1), [selectedCategory]) // 카테고리가 바뀔 때 마다 값을 1로 초기화해준다
+
+  useEffect(() => {
+    if (
+      NUMBER_OF_ITEMS_PER_PAGE * count >= postListByCategory.length ||
+      containerRef.current === null ||
+      containerRef.current.children.length === 0 ||
+      observer.current === null
+    )
+      return
+	
+		// 타겟 요소 관측 시작
+    observer.current.observe(
+      containerRef.current.children[containerRef.current.children.length - 1],
+    )
+	// 처음에는 All 카테고리가 선택되니까, All 카테고리의 10개의 postList가 리턴되어 있다.
+	// 그 요소중에서 가장 마지막 요소를 observe 하는 것
+  }, [count, selectedCategory])
+
+  return {
+    containerRef,
+    postList: postListByCategory.slice(0, count * NUMBER_OF_ITEMS_PER_PAGE),
+  }
+	// 화면에 보이는지 체크하기 위한 특정 요소를 선택하기 위해, 상위 요소인 PostListWrapper를 연결해야합니다.
+	// 이를 위해 사용하는 Hook이 useRef이며, 다음과 같이 커스텀 훅에서 ref를 선언한 후 반환값에 추가해줍시다. (containerRef)
+}
+
+export default useInfiniteScroll
+
+```
+
+---
+
+<br/>
+
+### 3. 반응형
+
+- 이전 블로그를 운영할 때 Google Search Console을 통해 검색 실적을 확인해 보면 모바일 기기를 사용해 블로그에 접속한 사용자들도 있었습니다
+- 그렇기 때문에 모바일 기기를 사용해서 블로그에 접근했을 때도 대응할 수 있도록 반응형 처리를 해주었고 화면 크기에 따라 다른 폰트 사이즈 및 Padding 값이 적용되도록 했습니다.
