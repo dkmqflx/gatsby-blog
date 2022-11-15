@@ -9,6 +9,9 @@ const ProfileImageWrapper = styled(GatsbyImage)`
   min-height: 4.5rem;
   border-radius: 50%;
   margin-right: 1.25em;
+  & img {
+    border-radius: 50%;
+  }
 `
 
 const ProfileImage = ({ profileImage }: { profileImage: IGatsbyImageData }) => {
