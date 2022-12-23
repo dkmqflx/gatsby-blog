@@ -51,7 +51,7 @@ const Title = styled.div`
   font-size: 1.375rem;
   font-weight: 600;
 
-  @media (max-width: 23.438rem) {
+  @media (max-width: 48rem) {
     font-size: 1.25rem;
   }
 `
@@ -68,7 +68,7 @@ const Info = styled.div`
   color: var(--secondary-color);
   font-size: 0.875rem;
 
-  @media (max-width: 23.438rem) {
+  @media (max-width: 48rem) {
     font-size: 0.75rem;
   }
 `

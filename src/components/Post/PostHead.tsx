@@ -22,7 +22,7 @@ const PostHeadWrapper = styled.div`
   padding: 3em 0;
   border-bottom: 1px solid #e5e5e5;
 
-  @media (max-width: 23.438rem) {
+  @media (max-width: 48rem) {
     padding-top: 0;
     padding-bottom: 1.5em;
   }
@@ -39,7 +39,7 @@ const Title = styled.h1`
   font-size: 2.25rem;
   font-weight: 800;
 
-  @media (max-width: 23.438rem) {
+  @media (max-width: 48rem) {
     font-size: 1.875rem;
   }
 `

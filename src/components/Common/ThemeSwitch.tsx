@@ -8,7 +8,7 @@ import useTheme from 'hooks/useTheme'
 const Light = styled(LightIcon)`
   cursor: pointer;
 
-  @media (max-width: 23.438rem) {
+  @media (max-width: 48rem) {
     width: 2.5rem;
     height: 2.5rem;
   }
@@ -17,7 +17,7 @@ const Light = styled(LightIcon)`
 const Dark = styled(DarkIcon)`
   cursor: pointer;
 
-  @media (max-width: 23.438rem) {
+  @media (max-width: 48rem) {
     width: 3.5rem;
     height: 3.5rem;
   }

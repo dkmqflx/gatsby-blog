@@ -97,7 +97,7 @@ const CategoryListWrapper = styled.div`
   overflow: hidden;
   height: 2.5rem;
 
-  @media (max-width: 23.438rem) {
+  @media (max-width: 48rem) {
     margin-bottom: 2em;
   }
 `

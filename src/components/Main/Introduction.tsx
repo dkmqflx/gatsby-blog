@@ -59,7 +59,7 @@ const Profile = styled.div`
 const IntroductionWrapper = styled.div`
   margin-bottom: 1.625em;
 
-  @media (max-width: 23.438rem) {
+  @media (max-width: 48rem) {
     margin-bottom: 1.2em;
   }
 `
@@ -67,7 +67,7 @@ const SocalLink = styled(Link)`
   &:not(:first-of-type) {
     margin-left: 0.625em;
 
-    @media (max-width: 23.438rem) {
+    @media (max-width: 48rem) {
       margin-left: 0.4em;
     }
   }
