@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   padding: 0 3.75em;
 
   @media (max-width: 23.438rem) {
-    padding: 1em;
+    padding: 0 1em;
     font-size: 0.875rem;
   }
 `
