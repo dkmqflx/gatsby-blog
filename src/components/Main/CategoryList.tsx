@@ -9,6 +9,9 @@ import React, {
 import { Link } from 'gatsby'
 import { CategoryListProps } from 'types/main.types'
 import styled from '@emotion/styled'
+import DownArrow from '/static/downArrow.svg'
+import UpArrow from '/static/upArrow.svg'
+
 type CategoryItemProps = {
   active: boolean
 }
@@ -45,13 +48,25 @@ const CategoryLink = styled(({ active, ...props }: GatsbyLinkProps) => (
   }
 `
 
-const Icon = styled.span`
+const UpArrowIcon = styled(UpArrow)`
   position: absolute;
   right: 1em;
   cursor: pointer;
-  color: var(--secondary-color);
-  font-weight: bold;
-  font-size: 1.25rem;
+
+  path {
+    stroke: var(--secondary-color);
+    fill: var(--secondary-color);
+  }
+`
+
+const DownArrowIcon = styled(DownArrow)`
+  position: absolute;
+  right: 1em;
+  cursor: pointer;
+  path {
+    stroke: var(--secondary-color);
+    fill: var(--secondary-color);
+  }
 `
 
 const CategoryList = ({
@@ -110,9 +125,9 @@ const CategoryList = ({
 
       {visible &&
         (more ? (
-          <Icon onClick={toggle}>-</Icon>
+          <UpArrowIcon onClick={toggle}>-</UpArrowIcon>
         ) : (
-          <Icon onClick={toggle}>+</Icon>
+          <DownArrowIcon onClick={toggle}>+</DownArrowIcon>
         ))}
     </CategoryListWrapper>
   )
