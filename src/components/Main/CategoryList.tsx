@@ -9,7 +9,6 @@ import React, {
 import { Link } from 'gatsby'
 import { CategoryListProps } from 'types/main.types'
 import styled from '@emotion/styled'
-
 type CategoryItemProps = {
   active: boolean
 }
@@ -20,7 +19,7 @@ type GatsbyLinkProps = {
   to: string
 } & CategoryItemProps
 
-const CategoryListWrapper = styled.div<{ more: boolean }>`
+const CategoryListWrapper = styled.div`
   display: flex;
   position: relative;
   margin-bottom: 2.5em;
@@ -37,7 +36,6 @@ const CategoryLink = styled(({ active, ...props }: GatsbyLinkProps) => (
   background-color: var(--button-color);
   font-size: 0.875rem;
   margin-right: 0.625em;
-  margin-bottom: 0.625em;
   padding: 0.625em;
   border-radius: 0.25em;
   font-weight: ${({ active }) => (active ? '700' : '400')};
@@ -89,14 +87,17 @@ const CategoryList = ({
       categoryRef.current.clientHeight < categoryRef.current.scrollHeight
     ) {
       categoryRef.current.style.height = '2.5rem'
-
       categoryRef.current.style.transition = 'all 0.3s linear'
+
+      const categorLinks = categoryRef.current.querySelectorAll('a')
+      categorLinks.forEach(link => (link.style.marginBottom = '0.625em'))
+
       setVisible(true)
     }
   }, [])
 
   return (
-    <CategoryListWrapper more={more} ref={categoryRef}>
+    <CategoryListWrapper ref={categoryRef}>
       {Object.entries(categoryList).map(([name, count]) => (
         <CategoryLink
           key={name}
