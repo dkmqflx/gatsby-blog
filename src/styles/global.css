@@ -19,3 +19,7 @@ body.dark {
   --border-color: #3d4043;
   --text-background-color: #908d8d1e;
 }
+
+.utterances {
+  max-width: 100%;
+}

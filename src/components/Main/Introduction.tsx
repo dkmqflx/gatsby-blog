@@ -8,33 +8,6 @@ import LinkedIn from '/static/linkedin.svg'
 import Twitter from '/static/twitter.svg'
 import Facebook from '/static/facebook.svg'
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  word-break: break-word;
-  margin: 1.25em 0;
-  padding: 0 1em;
-`
-
-const Author = styled.div`
-  font-weight: bold;
-`
-
-const Profile = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const IntroductionWrapper = styled.div`
-  margin: 0.25em 0 0.625em 0;
-`
-const SocalLink = styled(Link)`
-  &:not(:first-of-type) {
-    margin-left: 0.5em;
-  }
-`
-
 const socialIcons: { [index: string]: JSX.Element } = {
   github: <Github />,
   linkedin: <LinkedIn />,
@@ -44,7 +17,6 @@ const socialIcons: { [index: string]: JSX.Element } = {
 
 const Introduction = ({
   profileImage,
-  author,
   introduction,
   social,
 }: IntroductionProps) => {
@@ -54,7 +26,6 @@ const Introduction = ({
         <ProfileImage profileImage={profileImage} />
 
         <div>
-          <Author>Written by {author}</Author>
           <IntroductionWrapper>{introduction}</IntroductionWrapper>
           {Object.entries(social).map(
             ([key, value]) =>
@@ -71,3 +42,25 @@ const Introduction = ({
 }
 
 export default Introduction
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  word-break: break-word;
+  margin-bottom: 2.5em;
+`
+
+const Profile = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const IntroductionWrapper = styled.div`
+  margin-bottom: 1.625em;
+`
+const SocalLink = styled(Link)`
+  &:not(:first-of-type) {
+    margin-left: 0.625em;
+  }
+`

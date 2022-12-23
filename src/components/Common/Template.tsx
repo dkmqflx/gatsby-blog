@@ -13,15 +13,6 @@ type TemplateProps = {
   children: ReactNode
 }
 
-const Container = styled.main`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 1em;
-`
-
 const Template = ({
   title,
   description,
@@ -68,3 +59,11 @@ const Template = ({
 }
 
 export default Template
+
+const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+`

@@ -22,53 +22,6 @@ type GatsbyLinkProps = {
   to: string
 } & CategoryItemProps
 
-const CategoryListWrapper = styled.div`
-  display: flex;
-  position: relative;
-  margin-bottom: 2.5em;
-  padding: 0 1em;
-
-  flex-wrap: wrap;
-  overflow: hidden;
-  height: 2.5rem;
-`
-
-const CategoryLink = styled(({ active, ...props }: GatsbyLinkProps) => (
-  <Link {...props} />
-))<CategoryItemProps>`
-  background-color: var(--button-color);
-  font-size: 0.875rem;
-  margin-right: 0.625em;
-  padding: 0.625em;
-  border-radius: 0.25em;
-  font-weight: ${({ active }) => (active ? '700' : '400')};
-
-  &:last-of-type {
-    margin-right: 0;
-  }
-`
-
-const UpArrowIcon = styled(UpArrow)`
-  position: absolute;
-  right: 1em;
-  cursor: pointer;
-
-  path {
-    stroke: var(--secondary-color);
-    fill: var(--secondary-color);
-  }
-`
-
-const DownArrowIcon = styled(DownArrow)`
-  position: absolute;
-  right: 1em;
-  cursor: pointer;
-  path {
-    stroke: var(--secondary-color);
-    fill: var(--secondary-color);
-  }
-`
-
 const CategoryList = ({
   selectedCategory,
   categoryList,
@@ -134,3 +87,49 @@ const CategoryList = ({
 }
 
 export default CategoryList
+
+const CategoryListWrapper = styled.div`
+  display: flex;
+  position: relative;
+  margin-bottom: 4em;
+
+  flex-wrap: wrap;
+  overflow: hidden;
+  height: 2.5rem;
+`
+
+const CategoryLink = styled(({ active, ...props }: GatsbyLinkProps) => (
+  <Link {...props} />
+))<CategoryItemProps>`
+  background-color: var(--button-color);
+  font-size: 1rem;
+  margin-right: 1em;
+  padding: 0.625em;
+  border-radius: 0.25rem;
+  font-weight: ${({ active }) => (active ? '700' : '400')};
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+`
+
+const UpArrowIcon = styled(UpArrow)`
+  position: absolute;
+  right: 1em;
+  cursor: pointer;
+
+  path {
+    stroke: var(--secondary-color);
+    fill: var(--secondary-color);
+  }
+`
+
+const DownArrowIcon = styled(DownArrow)`
+  position: absolute;
+  right: 1em;
+  cursor: pointer;
+  path {
+    stroke: var(--secondary-color);
+    fill: var(--secondary-color);
+  }
+`

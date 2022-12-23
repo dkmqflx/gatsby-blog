@@ -65,7 +65,6 @@ const index = ({
     <Layout>
       <Introduction
         profileImage={gatsbyImageData}
-        author={author}
         introduction={introduction}
         social={social}
       />
@@ -123,7 +122,7 @@ export const getPostList = graphql`
           frontmatter {
             title
             summary
-            date(formatString: "YYYY.MM.DD.")
+            date(formatString: "YYYY.MM.DD")
             categories
           }
         }

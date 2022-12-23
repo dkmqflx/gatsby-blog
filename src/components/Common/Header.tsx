@@ -3,13 +3,6 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import styled from '@emotion/styled'
 import ThemeSwitch from './ThemeSwitch'
 
-const HeaderWrapper = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1em;
-`
-
 const Header = () => {
   const {
     site: {
@@ -30,7 +23,7 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <Link to="/">
-        <h1>{`${author}'s Blog`}</h1>
+        <HeaderTitle>{`${author}'s Blog`}</HeaderTitle>
       </Link>
       <ThemeSwitch />
     </HeaderWrapper>
@@ -38,3 +31,17 @@ const Header = () => {
 }
 
 export default Header
+
+const HeaderWrapper = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3.75em;
+  height: 5rem;
+  margin-bottom: 2.75em;
+`
+
+const HeaderTitle = styled.h1`
+  font-size: 1.75rem;
+  font-weight: 600;
+`

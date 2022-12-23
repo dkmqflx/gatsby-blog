@@ -2,13 +2,6 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from '@emotion/styled'
 
-const Wrapper = styled.footer`
-  display: flex;
-  justify-content: center;
-  padding: 2.5em 0;
-  font-size: 0.875rem;
-`
-
 const Footer = () => {
   const {
     site: {
@@ -30,3 +23,11 @@ const Footer = () => {
 }
 
 export default Footer
+
+const Wrapper = styled.footer`
+  display: flex;
+  justify-content: center;
+  padding-top: 6.25em;
+  padding-bottom: 3.125em;
+  font-size: 0.875rem;
+`

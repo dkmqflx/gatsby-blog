@@ -38,7 +38,6 @@ export type IndexPagePropsType = {
 
 export type IntroductionProps = {
   profileImage: IGatsbyImageData
-  author: string
   introduction: string
   social: {
     github: string

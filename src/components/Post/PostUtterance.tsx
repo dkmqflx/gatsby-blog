@@ -2,6 +2,7 @@ import { initialTheme } from 'hooks/useTheme'
 import React, { MutableRefObject, useEffect, useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 import { DARK_THEME } from 'constants/theme'
+import styled from '@emotion/styled'
 
 const src = 'https://utteranc.es/client.js'
 const repo = 'dkmqflx/gatsby-blog'

@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from '@emotion/styled'
 import PostItem from 'components/Main/PostItem'
 import { PostListItemType } from 'types/post.types'
 import useInfiniteScroll, {
@@ -11,11 +10,6 @@ type PostListProps = {
   posts: PostListItemType[]
 }
 
-const PostListWrapper = styled.div`
-  width: 100%;
-  margin: 0 auto;
-`
-
 const PostList = ({ selectedCategory, posts }: PostListProps) => {
   const { containerRef, postList }: useInfiniteScrollType = useInfiniteScroll(
     selectedCategory,
@@ -23,7 +17,7 @@ const PostList = ({ selectedCategory, posts }: PostListProps) => {
   )
 
   return (
-    <PostListWrapper ref={containerRef}>
+    <div ref={containerRef}>
       {postList.map(
         ({
           node: {
@@ -40,7 +34,7 @@ const PostList = ({ selectedCategory, posts }: PostListProps) => {
           />
         ),
       )}
-    </PostListWrapper>
+    </div>
   )
 }
 
