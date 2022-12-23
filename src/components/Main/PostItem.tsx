@@ -47,9 +47,16 @@ const PostItemWrapper = styled(Link)`
 const Title = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-right: 1.5em;
   font-size: 1.375rem;
   font-weight: 600;
+
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: break-word;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 
   @media (max-width: 48rem) {
     font-size: 1.25rem;
