@@ -21,6 +21,11 @@ const PostHeadWrapper = styled.div`
   flex-direction: column;
   padding: 3em 0;
   border-bottom: 1px solid #e5e5e5;
+
+  @media (max-width: 23.438rem) {
+    padding-top: 0;
+    padding-bottom: 1.5em;
+  }
 `
 
 const Title = styled.h1`
@@ -33,6 +38,10 @@ const Title = styled.h1`
   -webkit-box-orient: vertical;
   font-size: 2.25rem;
   font-weight: 800;
+
+  @media (max-width: 23.438rem) {
+    font-size: 1.875rem;
+  }
 `
 
 const PostData = styled.div`

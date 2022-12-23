@@ -96,13 +96,16 @@ const CategoryListWrapper = styled.div`
   flex-wrap: wrap;
   overflow: hidden;
   height: 2.5rem;
+
+  @media (max-width: 23.438rem) {
+    margin-bottom: 2em;
+  }
 `
 
 const CategoryLink = styled(({ active, ...props }: GatsbyLinkProps) => (
   <Link {...props} />
 ))<CategoryItemProps>`
   background-color: var(--button-color);
-  font-size: 1rem;
   margin-right: 1em;
   padding: 0.625em;
   border-radius: 0.25rem;

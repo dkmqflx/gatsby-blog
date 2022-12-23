@@ -14,6 +14,15 @@ const ProfileImageWrapper = styled(GatsbyImage)`
   & img {
     border-radius: 50%;
   }
+
+  @media (max-width: 23.438rem) {
+    width: 5rem;
+    height: 5rem;
+    min-width: 5rem;
+    min-height: 5rem;
+
+    margin-right: 1.125em;
+  }
 `
 
 const ProfileImage = ({ profileImage }: { profileImage: IGatsbyImageData }) => {

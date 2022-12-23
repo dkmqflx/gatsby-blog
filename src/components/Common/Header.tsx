@@ -37,11 +37,21 @@ const HeaderWrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   margin-top: 3.75em;
-  height: 5rem;
   margin-bottom: 2.75em;
+  height: 5rem;
+
+  @media (max-width: 23.438rem) {
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+    height: 3rem;
+  }
 `
 
 const HeaderTitle = styled.h1`
   font-size: 1.75rem;
   font-weight: 600;
+
+  @media (max-width: 23.438rem) {
+    font-size: 1.625rem;
+  }
 `

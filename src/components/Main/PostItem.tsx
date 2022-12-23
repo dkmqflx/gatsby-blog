@@ -50,6 +50,10 @@ const Title = styled.div`
   margin-right: 1.5em;
   font-size: 1.375rem;
   font-weight: 600;
+
+  @media (max-width: 23.438rem) {
+    font-size: 1.25rem;
+  }
 `
 
 const InfoWrapper = styled.div`
@@ -63,6 +67,10 @@ const InfoWrapper = styled.div`
 const Info = styled.div`
   color: var(--secondary-color);
   font-size: 0.875rem;
+
+  @media (max-width: 23.438rem) {
+    font-size: 0.75rem;
+  }
 `
 
 const Summary = styled.div`
