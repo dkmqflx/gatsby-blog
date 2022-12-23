@@ -57,6 +57,9 @@ const CategoryList = ({
       categoryRef.current.style.height = '2.5rem'
       categoryRef.current.style.transition = 'all 0.3s linear'
 
+      console.log('client', categoryRef.current.clientHeight)
+      console.log('scrollHeight', categoryRef.current.scrollHeight)
+
       const categorLinks = categoryRef.current.querySelectorAll('a')
       categorLinks.forEach(link => (link.style.marginBottom = '0.625em'))
 
@@ -107,8 +110,9 @@ const CategoryLink = styled(({ active, ...props }: GatsbyLinkProps) => (
 ))<CategoryItemProps>`
   background-color: var(--button-color);
   margin-right: 1em;
-  padding: 0.625em;
+  padding: 0.5rem;
   border-radius: 0.25rem;
+
   font-weight: ${({ active }) => (active ? '700' : '400')};
 
   &:last-of-type {
