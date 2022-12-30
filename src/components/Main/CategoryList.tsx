@@ -57,9 +57,6 @@ const CategoryList = ({
       categoryRef.current.style.height = '2.5rem'
       categoryRef.current.style.transition = 'all 0.3s linear'
 
-      console.log('client', categoryRef.current.clientHeight)
-      console.log('scrollHeight', categoryRef.current.scrollHeight)
-
       const categorLinks = categoryRef.current.querySelectorAll('a')
       categorLinks.forEach(link => (link.style.marginBottom = '0.625em'))
 
