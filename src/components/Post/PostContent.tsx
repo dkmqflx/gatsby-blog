@@ -9,6 +9,7 @@ const MarkdownRenderer = styled.div`
   margin: 0 auto;
   padding: 3.75em 0;
   word-break: break-all;
+  white-space: pre-wrap;
 
   // Markdown Style
   line-height: 1.8;
@@ -53,8 +54,10 @@ const MarkdownRenderer = styled.div`
   blockquote {
     margin: 1.25em 0;
     padding: 0.25em 0.875em;
-    border-left: 0.125em solid #000000;
+    border-left: 4px solid #ccc;
     font-weight: 700;
+
+    background-color: var(--text-background-color);
   }
 
   // Adjust List Element Style
@@ -80,6 +83,7 @@ const MarkdownRenderer = styled.div`
     margin: 1.25em 0;
     padding: 0.875em;
     font-size: 0.875rem;
+    border-radius: 4px;
 
     ::-webkit-scrollbar-thumb {
       background: #ffffff80;
