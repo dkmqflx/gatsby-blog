@@ -1,7 +1,7 @@
 ---
 date: '2020-09-20'
 title: '자바스크립트 클래스와 this 바인딩'
-categories: ['CSS']
+categories: ['JavaScript']
 summary: '자바스크립트 클래스와 this 바인딩에 대해서 정리한 글입니다.'
 ---
 
