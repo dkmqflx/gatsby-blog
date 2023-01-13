@@ -8,7 +8,7 @@ const MarkdownRenderer = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 3.75em 0;
-  word-break: break-all;
+  word-break: break-word;
   white-space: pre-wrap;
 
   // Markdown Style
