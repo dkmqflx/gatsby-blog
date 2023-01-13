@@ -1,7 +1,7 @@
 ---
 date: '2021-07-18'
 title: '상속보다는 컴포지션을 사용하기 (Composition Over Inheritance)'
-categories: ['TypeScript', 'OOP']
+categories: ['OOP', 'TypeScript']
 summary: 'OOP에 상속보다는 컴포지션을 사용하기 (Composition Over Inheritance)에 관련된 내용입니다.'
 ---
 
