@@ -99,6 +99,8 @@ const MarkdownRenderer = styled.div`
   code[class*='language-text'] {
     color: #e53a40;
     background-color: var(--text-background-color);
+    padding: 0.1em 0.4em;
+    margin: 0 0.15em;
   }
 
   // Markdown Responsive Design
