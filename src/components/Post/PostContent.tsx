@@ -9,7 +9,6 @@ const MarkdownRenderer = styled.div`
   margin: 0 auto;
   padding: 3.75em 0;
   word-break: break-word;
-  white-space: pre-wrap;
 
   // Markdown Style
   line-height: 1.8;
