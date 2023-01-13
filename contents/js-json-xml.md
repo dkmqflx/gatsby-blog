@@ -57,8 +57,7 @@ console.log(json) // {"type":"object","date":"2023-01-13T03:09:07.445Z"}
 
 ### XML (Extensible Markup Language)
 
-XML은 열린 태그 닫힌 태그로 이루어진 구조의 데이터를 의미합니다. xml 옆에 version과 encoding을 작성하는데 이 부분을 프롤로그라고 합니다.
-태그가 정해져 있는 HTML과 달리 XML은 태그가 정해져 있지 않습니다. 그리고 가장 최상위 태그는 아래 코드의 `Data` 처럼 하나만 사용이 가능합니다.
+XML은 열린 태그 닫힌 태그로 이루어진 구조의 데이터를 의미합니다. xml 옆에 version과 encoding을 작성하는데 이 부분을 프롤로그라고 합니다. 태그가 정해져 있는 HTML과 달리 XML은 태그가 정해져 있지 않습니다. 그리고 가장 최상위 태그는 아래 코드의 `Data` 처럼 하나만 사용이 가능합니다.
 
 ```xml
 
@@ -74,6 +73,21 @@ XML은 열린 태그 닫힌 태그로 이루어진 구조의 데이터를 의미
     </Second>
   </Data>
 
+```
+
+xml이 사용되는 대표적인 예시가 sitemap.xml입니다. SEO (Searh Engine Optimization)을 위해서는 sitemap.xml가 필수적입니다. 구글 사이트를 예로 들면, 구글에 크롤링 봇이 있는데 이 봇이 사이트를 찾아다니면서 사이트에 대한 정보를 가공해서 구글 DB 안에 insert 하게 됩니다. 그러면 DB안에 있는 정보를 기반으로 해서 구글은 사용자가 어떤 것을 검색했을 때 그에 맞는 결과를 화면에 보여줍니다. 그런데 이 크롤링 봇이 사이를 찾아다니면서 모든 정보를 수집할 수 있겠지만 잘 안되는 경우가 발생할 수 있습니다. 하지만 sitemap.xml을 최상단에 선언해 놓으면 크롤링 봇이 이 사이트에 대한 페이지를 빠짐없이 크롤링해서 DB에 저장할 수 있게 됩니다. 사이트가 매우 큰 경우 크기로 인해 웹 크롤러가 신규 또는 최근에 업데이트 된 웹 사이트를 지나칠 수 있고 처음 사이트를 접속했을 때 이 사이를 저 사이트로 보내줄 수 있는 링크가 종속적으로 연결되어 있으면 잘 되는데 연결되어 있지 않으면 크롤링이 잘 못할 수도 있다. 이러한 것을 방지하는 것이 sitemap.xml의 역할입니다
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://www.example.com/foo.html</loc>
+    <lastmod>2018-06-04</lastmod>
+</url> <url>
+    <loc>http://www.example.com/abc.html</loc>
+    <lastmod>2018-06-04</lastmod>
+  </url>
+</urlset>
 ```
 
 XML과 JSON과 비교해보면 XML같은 경우 닫는 태그가 필요하기 때문에 JSON 보다 글자수가 더 많아져서 상대적으로 더 무겁습니다. 또한 자바스크립트 객체로 변환할 때도 JSON의 경우 `JSON.stringfy`, `JSON.parse`을 사용해서 간편하게 처리할 수 있지만 XML의 경우 더 복잡하다는 단점이 있습니다.
