@@ -5,9 +5,7 @@
 - 이러한 점 때문에 익숙한 리액트로 블로그를 개발할 수 있는 정적 사이트 생성 프레임워크인 `Gatsby`를 사용해서 새로운 블로그를 만들었습니다.
 - 그리고 블로그를 만들기에 앞서 [Figma](https://www.figma.com/file/Zvs6EwHvq7VKxmk6H3LfKx/%EB%B8%94%EB%A1%9C%EA%B7%B8-UI?node-id=0%3A1)를 통해 기본적인 디자인 작업을 하였고 이를 기반으로 개발을 하였습니다
 
-
 <br/>
-
 
 ## 블로그를 만들면서 고민했던 점들
 
@@ -17,6 +15,14 @@
 - 이전 블로그에는 다크모드 기능이 없었기 때문에 새로 블로그를 개발하면서 다크모드 기능을 구현하였습니다.
 
 - `window.matchMedia()` 함수와 `prefers-color-scheme` 속성을 사용해서 사용자의 시스템 설정에 따라 다크모드 또는 라이트모드가 적용되도록 하였고 테마 값을 로컬 스토리지에 값을 저장해주는 방식으로 구현했습니다
+
+- 처음에는 `Emotion`에서 제공하는 `Global` 컴포넌트안에 클래스를 정의한 다음 라이트모드, 다크모드 스타일이 적용되도록 하였습니다
+
+- 하지만 다크모드로 설정한 다음 새로고침을 하면 라이트모드가 적용된 후 다크모드가 적용되면서 깜빡이는 현상이 나타났는데 그 이유는 사용자의 설정을 확인하고 적용하기 전에 HTML이 생성되었기 때문입니다.
+
+- 즉, 기본 테마를 라이트모드로 설정한 후 배포를 했기 때문에 라이트모드가 우선적으로 적용된 다음 사용자가 설정한 다크모드가 적용되었던 것입니다.
+
+- 따라서 이 문제를 해결하기 위해 Gatsby의 Server Side Rendering API를 사용하였습니다.
 
 ```jsx
 // gatsby-ssr.js
@@ -48,10 +54,7 @@ export const onRenderBody = ({ setPreBodyComponents }) =>
   ])
 ```
 
-- 처음에는 `Emotion`에서 제공하는 `Global` 컴포넌트안에 클래스를 정의한 다음 라이트모드, 다크모드 스타일이 적용되도록 하였습니다
-- 하지만 다크모드로 설정한 다음 새로고침을 하면 라이트모드가 적용된 후 다크모드가 적용되면서 깜빡이는 현상이 나타났는데 그 이유는 사용자의 설정을 확인하고 적용하기 전에 HTML이 생성되었기 때문입니다.
-- 즉, 기본 테마를 라이트모드로 설정한 후 배포를 했기 때문에 라이트모드가 우선적으로 적용된 다음 사용자가 설정한 다크모드가 적용되었던 것입니다.
-- 따라서 이 문제를 해결하기 위해 `Emotion`의 `Global` 컴포넌트 대신 global.css 파일에 CSS 커스텀 속성(CSS Custom Properties)을 정의해주었고 필요한 곳에서 해당 값들을 사용하는 방식으로 문제를 처리했습니다.
+`Emotion`의 `Global` 컴포넌트 대신 global.css 파일에 CSS 커스텀 속성(CSS Custom Properties)을 정의해주었고 필요한 곳에서 해당 값들을 사용하는 방식으로 문제를 처리했습니다.
 
 ```css
 /* styles/glboal.css */
@@ -215,7 +218,7 @@ const useInfiniteScroll = function (
     observer.current = new IntersectionObserver((entries, observer) => {
 			// observer는 관측대상으로 단 하나의 요소만 관측할 것이기 때문에 관측 요소 배열 파라미터에 해당하는 entries 인자에는 하나의 데이터만 존재한다.
 			// entries에는 entries는 IntersectionObserverEntry 인스턴스의 배열로, 관측하는 요소들의 정보가 들어있다
-      
+
 			if (!entries[0].isIntersecting) return
 			// isIntersecting이라는 프로퍼티를 통해 화면에 노출되었는지를 확인할 수 있다.
 			// isIntersecting: 관찰 대상의 교차 상태(Boolean)
@@ -237,7 +240,7 @@ const useInfiniteScroll = function (
       observer.current === null
     )
       return
-	
+
 		// 타겟 요소 관측 시작
     observer.current.observe(
       containerRef.current.children[containerRef.current.children.length - 1],
