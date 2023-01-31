@@ -8,8 +8,8 @@
 import 'prismjs/themes/prism-tomorrow.css'
 import './src/styles/global.css'
 
-import { RecoilRoot } from 'recoil'
+// export const wrapRootElement = ({ element }) => {
+//   // console.log('window', window.theme)
 
-export const wrapRootElement = ({ element }) => {
-  return <RecoilRoot>{element}</RecoilRoot>
-}
+//   return <>{element}</>
+// }

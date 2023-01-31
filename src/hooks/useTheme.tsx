@@ -1,18 +1,17 @@
-import { useEffect } from 'react'
+import { useEffect, useState, createContext } from 'react'
 import { DARK_THEME, LIGHT_THEME, BLOG_THEME } from 'constants/theme'
-import { atom, useRecoilState } from 'recoil'
+import { useCallback } from 'react'
 
-type ThemeType = 'dark' | 'light'
+export type ThemeType = 'dark' | 'light'
+export type ThemeActionType = (theme: ThemeType) => void
 
-export const initialTheme = atom({
-  key: 'theme',
-  default: '',
-})
+export const ThemeValueContext = createContext<ThemeType | null>(null)
+export const ThemeToggleContext = createContext<ThemeActionType | null>(null)
 
 const useTheme = () => {
-  const [theme, setTheme] = useRecoilState(initialTheme)
+  const [theme, setTheme] = useState<ThemeType | null>(null)
 
-  const toggleTheme = (theme: ThemeType) => {
+  const toggleTheme = useCallback((theme: ThemeType) => {
     switch (theme) {
       case DARK_THEME:
         localStorage.setItem(BLOG_THEME, DARK_THEME)
@@ -32,15 +31,15 @@ const useTheme = () => {
       default:
         break
     }
-  }
+  }, [])
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setTheme(document.body.classList.value)
+      setTheme(document.body.classList.value as ThemeType)
     }
   }, [])
 
-  return { theme, toggleTheme }
+  return { ThemeValueContext, ThemeToggleContext, theme, toggleTheme }
 }
 
 export default useTheme

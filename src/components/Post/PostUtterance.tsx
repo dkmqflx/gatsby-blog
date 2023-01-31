@@ -1,8 +1,6 @@
-import { initialTheme } from 'hooks/useTheme'
-import React, { MutableRefObject, useEffect, useRef } from 'react'
-import { useRecoilValue } from 'recoil'
+import { MutableRefObject, useEffect, useRef, useContext } from 'react'
+import { ThemeValueContext } from 'hooks/useTheme'
 import { DARK_THEME } from 'constants/theme'
-import styled from '@emotion/styled'
 
 const src = 'https://utteranc.es/client.js'
 const repo = 'dkmqflx/gatsby-blog'
@@ -22,7 +20,7 @@ const PostUtterance = () => {
   const element: MutableRefObject<HTMLDivElement | null> =
     useRef<HTMLDivElement | null>(null)
 
-  const theme = useRecoilValue(initialTheme)
+  const theme = useContext(ThemeValueContext)
 
   const createUtterance = () => {
     const utterances: HTMLScriptElement = document.createElement('script')
@@ -54,7 +52,7 @@ const PostUtterance = () => {
   }
 
   useEffect(() => {
-    if (theme === '') return
+    if (!theme) return
 
     element.current?.querySelector(UTTERANCE_CLASS)
       ? changeUtterance()

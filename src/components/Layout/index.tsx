@@ -1,13 +1,21 @@
 import React, { ReactNode } from 'react'
 import Header from 'components/Common/Header'
+import useTheme from 'hooks/useTheme'
 import styled from '@emotion/styled'
 
 const Layout = ({ children }: { children: ReactNode }) => {
+  const { ThemeValueContext, ThemeToggleContext, theme, toggleTheme } =
+    useTheme()
+
   return (
-    <Wrapper>
-      <Header></Header>
-      {children}
-    </Wrapper>
+    <ThemeValueContext.Provider value={theme}>
+      <ThemeToggleContext.Provider value={toggleTheme}>
+        <Wrapper>
+          <Header></Header>
+          {children}
+        </Wrapper>
+      </ThemeToggleContext.Provider>
+    </ThemeValueContext.Provider>
   )
 }
 
