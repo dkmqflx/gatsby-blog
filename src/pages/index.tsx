@@ -1,8 +1,6 @@
-import React, { useMemo } from 'react'
 import { graphql } from 'gatsby'
 import queryString, { ParsedQuery } from 'query-string'
-import { IndexPagePropsType, CategoryListProps } from 'types/main.types'
-import { PostListItemType } from 'types/post.types'
+import { IndexPagePropsType } from 'types/main.types'
 import Layout from 'components/Layout'
 import Introduction from 'components/Main/Introduction'
 import CategoryList from 'components/Main/CategoryList'
@@ -36,31 +34,6 @@ const index = ({
       ? 'All'
       : parsed.category
 
-  const categoryList = useMemo(
-    () =>
-      edges.reduce(
-        (
-          list: CategoryListProps['categoryList'],
-          {
-            node: {
-              frontmatter: { categories },
-            },
-          }: PostListItemType,
-        ) => {
-          categories.forEach(category => {
-            if (list[category] === undefined) list[category] = 1
-            else list[category]++
-          })
-
-          list['All']++
-
-          return list
-        },
-        { All: 0 },
-      ),
-    [],
-  )
-
   return (
     <Layout>
       <Introduction
@@ -69,10 +42,7 @@ const index = ({
         social={social}
       />
 
-      <CategoryList
-        selectedCategory={selectedCategory}
-        categoryList={categoryList}
-      />
+      <CategoryList selectedCategory={selectedCategory} posts={edges} />
 
       <Template
         title={title}

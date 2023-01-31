@@ -49,7 +49,9 @@ export type IntroductionProps = {
 
 export type CategoryListProps = {
   selectedCategory: string
-  categoryList: {
-    [key: string]: number
-  }
+  posts: PostListItemType[]
+}
+
+export type categoryListType = {
+  [key: string]: number
 }

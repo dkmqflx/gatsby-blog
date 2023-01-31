@@ -5,9 +5,11 @@ import React, {
   useEffect,
   useRef,
   useState,
+  useMemo,
 } from 'react'
 import { Link } from 'gatsby'
-import { CategoryListProps } from 'types/main.types'
+import { CategoryListProps, categoryListType } from 'types/main.types'
+import { PostListItemType } from 'types/post.types'
 import styled from '@emotion/styled'
 import DownArrow from '/static/downArrow.svg'
 import UpArrow from '/static/upArrow.svg'
@@ -22,14 +24,36 @@ type GatsbyLinkProps = {
   to: string
 } & CategoryItemProps
 
-const CategoryList = ({
-  selectedCategory,
-  categoryList,
-}: CategoryListProps) => {
+const CategoryList = ({ selectedCategory, posts }: CategoryListProps) => {
   const [more, setMore] = useState(false)
   const [visible, setVisible] = useState(false)
   const categoryRef: MutableRefObject<HTMLDivElement | null> =
     useRef<HTMLDivElement | null>(null)
+
+  const categoryList = useMemo(
+    () =>
+      posts.reduce(
+        (
+          list: categoryListType,
+          {
+            node: {
+              frontmatter: { categories },
+            },
+          }: PostListItemType,
+        ) => {
+          categories.forEach(category => {
+            if (list[category] === undefined) list[category] = 1
+            else list[category]++
+          })
+
+          list['All']++
+
+          return list
+        },
+        { All: 0 },
+      ),
+    [],
+  )
 
   const toggle = useCallback(() => {
     setMore(more => !more)
