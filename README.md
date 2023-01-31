@@ -54,60 +54,33 @@ export const onRenderBody = ({ setPreBodyComponents }) =>
   ])
 ```
 
-`Emotion`의 `Global` 컴포넌트 대신 global.css 파일에 CSS 커스텀 속성(CSS Custom Properties)을 정의해주었고 필요한 곳에서 해당 값들을 사용하는 방식으로 문제를 처리했습니다.
-
-```css
-/* styles/glboal.css */
-
-body {
-  transition: background-color 0.3s linear;
-}
-
-body.light {
-  background-color: #f5f5f5;
-  color: #161616;
-  --secondary-color: #6c6c6c;
-  --button-color: #ececec;
-  --border-color: #c6c3c3ca;
-  --text-background-color: #dfdddd;
-}
-
-body.dark {
-  background-color: #202122;
-  color: #fff;
-  --secondary-color: #bec1c5;
-  --button-color: #303134;
-  --border-color: #3d4043;
-  --text-background-color: #908d8d1e;
-}
-```
+- 페이지가 렌더링되기에 앞서 `script` 태그가 실행되면서 사용자가 따로 설정한 테마가 없는 경우에는 시스템 설정에 맞게 테마가 적용이 되고 사용자가 다크모드 또는 라이트 모드를 선택한 경우에는 사용자가 선택한 테마가 적용이 됩니다.
 
 <br/>
 
-- 다크모드를 구현하는데 있어 또 하나 고려해야할 점은 바로 댓글 기능에서도 다크모드가 적용되야 하는 것이었습니다.
-- `Utterance`를 사용해서 댓글을 달 수 있는 기능을 구현했는데, 사용자가 다크모드를 선택했을 때 그에 맞게 테마가 바뀌어야 했습니다.
-- 여러가지 방법이 있었지만 블로그를 개발하는 것에 학습의 목적 또한 있었기 때문에 이번 기회에 `Recoil`을 학습하고 적용해보았습니다.
-- 아래처럼 `Recoil`을 사용해서 전역 상태를 관리하는 Custom hook을 정의해주었습니다.
-- Header 컴포넌트에 위치한 값을 전구 모양의 아이콘을 클릭했을 때 전역 상태의 값이 바뀌고, 그에 따라 Utterance의 테마가 바뀌도록 처리하였습니다.
+- 그리고 아래처럼 사용자가 테마를 바꿀 수 있는 기능을 구현하기 위한 custom hook을 정의해주었습니다.
 
-```jsx
-// hooks/useTheme.tsx
+- 사용자가 설정한 테마 값과 테마 값을 변경시킬 수 있는 Context를 정의해주었고, 필요한 곳에서 useContext로 해당 Context를 사용했습니다.
 
-import { useEffect } from 'react'
+```tsx
+import { useEffect, useState, createContext } from 'react'
 import { DARK_THEME, LIGHT_THEME, BLOG_THEME } from 'constants/theme'
-import { atom, useRecoilState } from 'recoil'
+import { useCallback } from 'react'
 
-type ThemeType = 'dark' | 'light'
+export type ThemeType = 'dark' | 'light'
+export type ThemeActionType = (theme: ThemeType) => void
 
-export const initialTheme = atom({
-  key: 'theme',
-  default: '',
-})
+export const ThemeValueContext = createContext<ThemeType | null>(null)
+// theme 값을  Provider로 전달하기 위한 Context
+
+export const ThemeToggleContext = createContext<ThemeActionType | null>(null)
+// theme 값을 변경시키는 함수를 Provider로 전달하기 위한 Context
 
 const useTheme = () => {
-  const [theme, setTheme] = useRecoilState(initialTheme)
+  const [theme, setTheme] = useState<ThemeType | null>(null)
 
-  const toggleTheme = (theme: ThemeType) => {
+  // theme 값을 변경시키는 함수
+  const toggleTheme = useCallback((theme: ThemeType) => {
     switch (theme) {
       case DARK_THEME:
         localStorage.setItem(BLOG_THEME, DARK_THEME)
@@ -127,38 +100,60 @@ const useTheme = () => {
       default:
         break
     }
-  }
+  }, [])
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setTheme(document.body.classList.value)
+      setTheme(document.body.classList.value as ThemeType)
     }
   }, [])
 
-  return { theme, toggleTheme }
+  return { ThemeValueContext, ThemeToggleContext, theme, toggleTheme }
 }
 
 export default useTheme
 ```
+
+<br/>
+
+- `Utterance`를 사용해서 댓글을 달 수 있는 기능을 구현했는데, 사용자가 다크모드를 선택했을 때 그에 맞게 테마가 바뀌어야 했습니다.
+
+- 전구 모양의 아이콘을 클릭했을 때 테마 값을 변경하는 `toggleTheme` 함수가 실행되도록 처리 했기 때문에 아래처럼 `useContext(ThemeValueContext)`로 테마 값을 전달받는 경우, 테마가 바뀔 때 마다 Utterance의 테마 또한 변경 됩니다.
 
 ```jsx
 // PostUtterance.tsx
 
 ...
 
-const theme = useRecoilValue(initialTheme) // 전역 상태 값을 받아온다
+const PostUtterance = () => {
 
-const changeUtterance = () => {
-    const message = {
-      type: 'set-theme',
-      theme: theme === DARK_THEME ? 'github-dark' : 'github-light', // 사용자가 설정한 모드에 따라 Utterance 테마 적용되도록 처리
+  ...
+
+  const theme = useContext(ThemeValueContext)// 테마 값을 받아온다
+
+  const changeUtterance = () => {
+      const message = {
+        type: 'set-theme',
+        theme: theme === DARK_THEME ? 'github-dark' : 'github-light', // 사용자가 설정한 모드에 따라 Utterance 테마 적용되도록 처리
+      }
+      const iframe = document.querySelector<HTMLIFrameElement>(UTTERANCE_CLASS)
+
+      iframe?.contentWindow?.postMessage(message, src)
     }
-    const iframe = document.querySelector<HTMLIFrameElement>(UTTERANCE_CLASS)
 
-    iframe?.contentWindow?.postMessage(message, src)
-  }
+  useEffect(() => {
+    if (!theme) return
 
-...
+    element.current?.querySelector(UTTERANCE_CLASS)
+      ? changeUtterance()
+      : createUtterance()
+  }, [theme])
+  // 테마 값이 변경될 때 마다 실행되서 Utterance에 변경된 테마가 적용된다
+
+  ...
+
+
+}
 ```
 
 ---
