@@ -30,7 +30,7 @@ const Introduction = ({
           {Object.entries(social).map(
             ([key, value]) =>
               value && (
-                <SocalLink key={key} to={value}>
+                <SocalLink key={key} href={value} target="_blank">
                   {socialIcons[key]}
                 </SocalLink>
               ),
@@ -63,7 +63,7 @@ const IntroductionWrapper = styled.div`
     margin-bottom: 1.2em;
   }
 `
-const SocalLink = styled(Link)`
+const SocalLink = styled.a`
   &:not(:first-of-type) {
     margin-left: 0.625em;
 
