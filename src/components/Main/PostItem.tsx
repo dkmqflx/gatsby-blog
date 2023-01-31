@@ -8,13 +8,7 @@ type PostItemProps = PostFrontmatterType & {
   readingTime: { text: string }
 }
 
-const PostItem = ({
-  title,
-  date,
-  summary,
-  link,
-  readingTime,
-}: PostItemProps) => {
+const PostItem = ({ title, date, link, readingTime }: PostItemProps) => {
   return (
     <PostItemWrapper to={link}>
       <Title>{title}</Title>
@@ -23,8 +17,6 @@ const PostItem = ({
         <Info>{date}</Info>
         <Info>{readingTime.text}</Info>
       </InfoWrapper>
-
-      <Summary>{summary}</Summary>
     </PostItemWrapper>
   )
 }
@@ -78,17 +70,4 @@ const Info = styled.div`
   @media (max-width: 48rem) {
     font-size: 0.75rem;
   }
-`
-
-const Summary = styled.div`
-  display: -webkit-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
-  overflow-wrap: break-word;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  line-height: 1.5;
-  opacity: 0.8;
-  color: var(--secondary-color);
 `
