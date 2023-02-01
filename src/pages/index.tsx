@@ -1,5 +1,5 @@
 import { graphql } from 'gatsby'
-import queryString, { ParsedQuery } from 'query-string'
+import { parseQuery } from '../utils'
 import { IndexPagePropsType } from 'types/main.types'
 import Layout from 'components/Layout'
 import Introduction from 'components/Main/Introduction'
@@ -27,12 +27,7 @@ const index = ({
     },
   },
 }: IndexPagePropsType) => {
-  const parsed: ParsedQuery<string> = queryString.parse(search)
-
-  const selectedCategory: string =
-    typeof parsed.category !== 'string' || !parsed.category
-      ? 'All'
-      : parsed.category
+  const selectedCategory = parseQuery(search)
 
   return (
     <Layout>
