@@ -40,7 +40,7 @@ const Title = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 1.375rem;
-  font-weight: 600;
+  font-weight: 500;
 
   display: -webkit-box;
   overflow: hidden;

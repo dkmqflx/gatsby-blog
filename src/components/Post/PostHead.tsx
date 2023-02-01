@@ -37,7 +37,7 @@ const Title = styled.h1`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   font-size: 2.25rem;
-  font-weight: 800;
+  font-weight: 900;
 
   @media (max-width: 48rem) {
     font-size: 1.875rem;

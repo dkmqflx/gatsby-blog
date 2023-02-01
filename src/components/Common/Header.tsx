@@ -49,7 +49,7 @@ const HeaderWrapper = styled.header`
 
 const HeaderTitle = styled.h1`
   font-size: 1.75rem;
-  font-weight: 600;
+  font-weight: 500;
 
   @media (max-width: 48rem) {
     font-size: 1.625rem;

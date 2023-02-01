@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import GlobalStyle from 'components/Common/GlobalStyle'
 import styled from '@emotion/styled'
 import PageNotFound from '/static/pageNotFound.svg'
 
@@ -36,7 +35,6 @@ const GoToMainButton = styled(Link)`
 const NotFoundPage = () => {
   return (
     <NotFoundPageWrapper>
-      <GlobalStyle />
       <PageNotFound />
       <NotFoundText>404</NotFoundText>
       <NotFoundDescription>찾을 수 없는 페이지입니다.</NotFoundDescription>
