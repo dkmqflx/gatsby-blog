@@ -38,15 +38,18 @@ const MarkdownRenderer = styled.div`
   }
 
   h1 {
-    font-size: 1.75rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
   }
 
   h3 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   // Adjust Quotation Element Style
