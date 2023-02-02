@@ -17,6 +17,18 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-netlify`,
+      options: {
+        headers: {
+          '/fonts/*': [
+            'Cache-Control: public',
+            'Cache-Control: max-age=365000000',
+            'Cache-Control: immutable',
+          ],
+        },
+      },
+    },
+    {
       resolve: 'gatsby-plugin-typescript',
       options: {
         isTSX: true,
