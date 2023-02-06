@@ -10,7 +10,7 @@ summary: 'React의 setState에서 callback 함수를 사용하는 방법에 대�
 React.memo는 고차 컴포넌트(Higher Order Component)로 React.memo로, 컴포넌트를 감싸주게 되면 해당 컴포넌트로 전달되는 props가 변경되는 경우에만 컴포넌트가 렌더링 됩니다.
 즉, React는 React.memo로 컴퍼넌트를 렌더링하고 결과를 메모이징(Memoizing)한 다음, 다시 렌더링이 일어날 때 props가 같다면 마지막으로 렌더링 된 결과를 재사용합니다.
 
-기본적으로 React.memo는 props 혹은 props의 객체를 비교할 때 얕은(shallow) 비교를 하지만, 두번째 인자로 props를 비교하기 위한 함수를 별도로 전달할 수 있습니다.
+기본적으로 React.memo는 props 혹은 props의 객체를 비교할 때 얕은(shallow) 비교를 하지만, 두번째 인자로 props를 비교하기 위한 함수를 별도로 전달할 수 있습니다. 여기서 얕은 비교란 원시타입의 경우에는 값이 같은지 비교하고, 객체인 경우에는 참조 값이 같은지를 비교하는 것입니다.
 
 ```jsx
 function MyComponent(props) {
