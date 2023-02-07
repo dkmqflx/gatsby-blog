@@ -105,6 +105,15 @@ const MarkdownRenderer = styled.div`
     margin: 0 0.15em;
   }
 
+  .gatsby-resp-image-figcaption {
+    color: #757575;
+    font-style: italic;
+    font-weight: normal;
+    margin-top: 0.5em;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
   // Markdown Responsive Design
   @media (max-width: 48rem) {
     width: 100%;
