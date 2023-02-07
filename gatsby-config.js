@@ -78,6 +78,7 @@ module.exports = {
             options: {
               quality: 100,
               withWebp: true,
+              showCaptions: true,
             },
           },
           {
