@@ -1,6 +1,6 @@
 import { ReactNode, useMemo } from 'react'
 import { Link } from 'gatsby'
-import { CategoryListProps, categoryListType } from 'types/main.types'
+import { CategoryListProps } from 'types/main.types'
 import { PostListItemType } from 'types/post.types'
 import styled from '@emotion/styled'
 
@@ -19,36 +19,33 @@ const CategoryList = ({ selectedCategory, posts }: CategoryListProps) => {
     () =>
       posts.reduce(
         (
-          list: categoryListType,
+          list: string[],
           {
             node: {
               frontmatter: { categories },
             },
           }: PostListItemType,
         ) => {
+          const updatedList = [...list]
           categories.forEach(category => {
-            if (list[category] === undefined) list[category] = 1
-            else list[category]++
+            if (!list.includes(category)) updatedList.push(category)
           })
-
-          list['All']++
-
-          return list
+          return updatedList
         },
-        { All: 0 },
+        ['All'],
       ),
     [],
   )
 
   return (
     <CategoryListWrapper>
-      {Object.entries(categoryList).map(([name, count]) => (
+      {categoryList.map(category => (
         <CategoryLink
-          key={name}
-          to={`/?category=${name}`}
-          active={name === selectedCategory}
+          key={category}
+          to={`/?category=${category}`}
+          active={category === selectedCategory}
         >
-          {name}({count})
+          {category}
         </CategoryLink>
       ))}
     </CategoryListWrapper>

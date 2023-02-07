@@ -51,7 +51,3 @@ export type CategoryListProps = {
   selectedCategory: string
   posts: PostListItemType[]
 }
-
-export type categoryListType = {
-  [key: string]: number
-}
