@@ -211,7 +211,7 @@ export default useTheme
 
 이 때 local storage에 테마가 있으면 해당하는 테마를 적용시키고, 따로 테마가 없는 경우에는 시스템 테마가 적용될 수 있도록 합니다.
 
-```tsx
+```js
 // gatsby-ssr.js`
 
 export const onRenderBody = ({ setPreBodyComponents }) =>
