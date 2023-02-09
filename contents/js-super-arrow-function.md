@@ -30,7 +30,7 @@ const orange = new Orange()
 orange.print()
 ```
 
-코드를 실행하면 일반 함수는 정상적으로 실행되어 `general` 문자열이 출력되지만 화살표 함수로 정의된 함수를 호출하는 부분에서는 에러가 발생합니다. 이렇게 에러가 발생하는 이유는 작성된 코드를 ES2015으로 변환해보면 확인할 수 있습니다.
+코드를 실행하면 일반 함수는 정상적으로 실행되어 `general` 문자열이 출력되지만 화살표 함수로 정의된 함수를 호출하는 부분에서는 에러가 발생합니다. 이렇게 에러가 발생하는 이유는 작성된 코드를 Babel을 사용해서 ES5으로 변환해보면 확인할 수 있습니다.
 
 ```js
 class Fruit {
@@ -66,14 +66,4 @@ console.log(Orange.prototype)
   [[Prototype]]: Object
 ```
 
-이러한 이유로 자식 클래스에서는 부모 클래스에서 화살표 함수로 정의한 함수를 호출할 수가 없게 됩니다.
-
----
-
-## Reference
-
-- [Arrow Functions in Class Properties Might Not Be As Great As We Think](https://medium.com/@charpeni/arrow-functions-in-class-properties-might-not-be-as-great-as-we-think-3b3551c440b1)
-
-- [Typescript: calling super method from extended class gives type error - (intermediate value) is not a function](https://stackoverflow.com/questions/64498584/typescript-calling-super-method-from-extended-class-gives-type-error-interme)
-
-- [How to invoke arrow functions on a superclass with super in subclass](https://stackoverflow.com/questions/57561473/how-to-invoke-arrow-functions-on-a-superclass-with-super-in-subclass)
+이러한 이유로 자식 클래스에서는 부모 클래스에서 화살표 함수로 정의한 함수를 super 키워드를 사용해서 호출할 수가 없습니다.
