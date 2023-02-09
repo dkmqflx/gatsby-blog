@@ -8,13 +8,13 @@ summary: 'BroadcastChannel API를 사용하는 방법에 대해 정리한 글입
 ## BroadcastChannel
 
 BroadcastChannel은 동일한 Origin을 갖는 서로 다른 창 또는 탭 사이에서 통신할 때 사용할 수 있는 API 입니다. <br/>
-아래처럼 BroadcastChannel을 생성할 수 있습니다. 이 때 동일한 Origin에 대해서는 중복되는 Channel 이름으로 BroadcastChannel을 만들 수 없습니다.
+아래처럼 BroadcastChannel을 생성할 수 있는데, 이 때 동일한 Origin에 대해서는 중복되는 Channel 이름으로 BroadcastChannel을 만들 수 없습니다.
 
 ```js
 const broadCastChannel = new BroadcastChannel(CHANNEL_NAME)
 ```
 
-이렇게 선언된 BroadcastChannel은 postMessage 함수를 통해서 메세지를 전달할 수 있는데, 전달된 메세지는 같은 이름의 BroadcastChannel를 listening 하고 있는 모든 BroadcastChannel에 전송됩니다
+이렇게 선언된 BroadcastChannel은 postMessage 함수를 통해서 메세지를 전달할 수 있고, 전달된 메세지는 같은 이름의 BroadcastChannel를 listening 하고 있는 모든 BroadcastChannel에 전송됩니다
 
 아래처럼 postMessage 함수에 `'new Message!'` 라는 메세지를 전달합니다.
 
