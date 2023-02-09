@@ -45,9 +45,9 @@ const element = {
 
 JSX가 React Element가 되는 일련의 과정을 통해서 JSX 문법을 사용하면 React.createElement 함수를 사용해서 코드를 작성할 필요 없이 간단하게 코드를 작성할 수 있는 것을 알 수 있습니다. 즉, JSX로 코드를 작성하게 되면 React.createElement가 실행되고 그 return 값이 바로 React Element 입니다.
 
-React Element는 JavaScript 객체로서 UI 구조를 나타냅니다.
+이 때, React Element는 JavaScript 객체로서 UI 구조를 나타냅니다.
 
-추가적으로 JSX의 또 다른 장접으로는 Injection Attacks로부터 안전하다는 것입니다. 사용자 정보와 같은 민감한 정보를 탈취하기 위해서 자바스크립트 코드를 삽입할 수 있는데 JSX는 렌더링하기 전에 모든 자바스크립트 코드를 string으로 escape 해주기 때문에 자바스크립트 코드로 실행이 되지 않아 이러한 공격으로 부터 안전하다는 장점이 있습니다.
+추가적으로 JSX의 또 다른 장점으로는 Injection Attacks로부터 안전하다는 것입니다. 사용자 정보와 같은 민감한 정보를 탈취하기 위해서 자바스크립트 코드를 삽입할 수 있는데 JSX는 렌더링하기 전에 모든 자바스크립트 코드를 string으로 escape 해주기 때문에 자바스크립트 코드로 실행이 되지 않아 이러한 공격으로 부터 안전하다는 장점이 있습니다.
 
 <br/>
 
@@ -82,7 +82,7 @@ ReactDOM.render 함수가 실행되는 과정을 통해 Render Phase와 Commit P
 ReactDOM.render(App, document.getElementById('root'))
 ```
 
-1. ReactDOM의 Render 함수에 전달되는 arguments는 두가지로 React Element 브라우저 DOM Element 입니다.
+1. ReactDOM의 Render 함수에 전달되는 arguments는 두가지로 React Element와 브라우저 DOM Element 입니다.
 2. ReactDOM.Render 함수가 실행되면 우선 최상위 컴포넌트 부터 시작해서 React element가 만들어집니다. (**Render Phase**)
 3. 이렇게 만들어진 React element가 DOM element에 소속되고 이렇게 DOM element로 인식된 React element가 브라우저에 의해 렌더링됩니다. (**Commit Phase**)
 
@@ -95,7 +95,7 @@ ReactDOM.render(App, document.getElementById('root'))
 1. 리액트는 컴포넌트 트리의 가장 상단에 위치한 Root 컴포넌트에서 시작해서 Leaf 컴포넌트까지 내려갑니다.
 2. 이 때 모든 업데이트가 필요한 컴포넌트(Flagged 컴포넌트)들을 찾고 Flagged 컴포넌트와 Flagged 컴포넌트에 영향을 받는 모든 컴포넌트들에 대해서 createElement를 실행해서 React Elements로 변환시켜준 다음 Render Output을 저장합니다.
 3. 모든 Flagged 컴포넌트에 대해 이 과정이 끝나고 나면 리액트는 이전에 렌더링된 React Elements(Virtual DOM)과 새롭게 렌더링된 React Elements(Virtual DOM)을 비교해줍니다. 이 과정을 재조정(Reconciliation)이라고 합니다.
-4. 그리고 나서 실제 DOM에 반영되어야 하는 모든 변경사항들을 Commit Phase로 전달됩니다. 여기서 중요한 것은 이전에 렌더링된 React Elements와 새롭게 렌더링된 React Elements를 비교해서 변경사항이 없다면 React Commit phase로 넘어가지 않고 어떠한 변화도 DOM에 적용되지 않습니다.
+4. 그리고 나서 실제 DOM에 반영되어야 하는 모든 변경사항들을 Commit Phase로 전달됩니다. 여기서 중요한 것은 이전에 렌더링된 React Elements와 새롭게 렌더링된 React Elements를 비교해서 변경사항이 없다면 Commit phase로 넘어가지 않고 어떠한 변화도 DOM에 적용되지 않습니다.
 
 **2. Commit Phase**
 
@@ -254,9 +254,9 @@ export default First
 
 ## 최적화 함수 사용하기 전에 코드 개선하기
 
-`React.memo` 또는 `useCallback`, `useMemo`를 사용해서 불필요하게 렌더링이 일어나는 것을 막고 최적화를 할 수 있습니다. 하지만 이렇게 최적화를 위한 코드를 작성하게 되면 내부적으로 특정한 동작을 실행해주어야 하기 때문에 비용이 발생하게 됩니다. 따라서 최적화를 위한 방법을 사욫하지 않고도 불필요한 렌더링일 발생하지 않도록 근본적으로 코드를 개선할 수 있습니다.
+`React.memo` 또는 `useCallback`, `useMemo`를 사용해서 불필요하게 렌더링이 일어나는 것을 막고 최적화를 할 수 있습니다. 하지만 이렇게 최적화를 위한 코드를 작성하게 되면 내부적으로 특정한 동작을 실행해주어야 하기 때문에 비용이 발생하게 됩니다. 따라서 최적화를 위한 방법을 사용하지 않고도 불필요한 렌더링일 발생하지 않도록 근본적으로 코드를 개선할 수 있습니다.
 
-아래는 Click 버튼을 클릭하면 state인 count가 증가하는 코드로 count 값이 변경되어 부모 컴포넌트인 Parent 컴포넌트가 렌더링 될 때 마다 자식 컴포넌트인 First 컴포넌트도 다시 렌더링 되는 코드입니다.
+아래는 Click 버튼을 클릭하면 state인 count가 증가하는 코드로, count 값이 변경되어 부모 컴포넌트인 Parent 컴포넌트가 렌더링 될 때 마다 자식 컴포넌트인 First 컴포넌트도 다시 렌더링 되는 코드입니다.
 
 ```js
 // Parent.js
@@ -398,6 +398,7 @@ export default function Parent({ children }) {
 }
 ```
 
-return 부분을 보면 children이 있는 것을 확인할 수 있습니다. 만약 이전처럼 Parent 컴포넌트 내부에서 First 컴포넌트를 불러와서 사용했다면 컴포넌트에 대한 React.createElement가 있어어서 Parent 컴포넌트가 렌더링될 때 마다 First 컴포넌트가 렌더링이 되었겠지만 이렇게 children을 props로 전달받게 되면 First 컴포넌트가 리렌더링 되더라도 children props로 전달받은 First 컴포넌트가 렌더링되는 것을 막을 수 있습니다.
+return 부분을 보면 children이 있는 것을 확인할 수 있습니다. 만약 이전처럼 Parent 컴포넌트 내부에서 First 컴포넌트를 불러와서 사용했다면 Parent 컴포넌트가 렌더링될 때 마다
+First 컴포넌트에 대한 React.createElement가 실행되어 컴포넌트가 렌더링이 되었겠지만 이렇게 children을 props로 전달받게 되면 First 컴포넌트가 리렌더링 되더라도 children props로 전달받은 First 컴포넌트가 렌더링되는 것을 막을 수 있습니다.
 
 이처럼 리액트에서 제공하는 `React.memo` 또는 `useCallback`, `useMemo`를 사용해서 최적화를 할 수 있지만 그 전에 코드를 개선함으로써 추가적인 코드를 작성할 필요 없이 최적화를 해줄 수 있습니다.
