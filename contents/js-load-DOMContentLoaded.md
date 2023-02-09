@@ -1,11 +1,11 @@
 ---
 date: '2021-01-20'
-title: 'DOMContentLoaded와 load 이벤트'
+title: 'DOMContentLoaded와 load 이벤트, beforeunload와 unload 이벤트 비교하기'
 categories: ['JavaScript']
 summary: 'DOMContentLoaded와 load 이벤트에 대해서 정리한 글입니다'
 ---
 
-### DOMContentLoaded, load
+### DOMContentLoaded vs load
 
 `DOMContentLoaded` 이벤트의 경우 브라우저의 HTML parsing이 끝난 다음 DOM 트리를 완성하는 즉시 발생합니다. 즉 폰트, 이미지, css 등 리소스가 다운로드 되는 것을 기다리지 않습니다.
 
@@ -27,10 +27,13 @@ summary: 'DOMContentLoaded와 load 이벤트에 대해서 정리한 글입니다
 </body>
 ```
 
-### beforeunload, unload
+---
+
+### beforeunload vs unload
 
 `beforeunload` 이벤트의 경우 unload 되기 전에 실행되는 이벤트로 사용자가 페이지를 나가기 전에 실행됩니다.
-`unload` 이벤트의 경우에는 사용자가 페이지를 떠날 때, 즉 모든 리소스들이 unloade 될 때 실행됩니다
+
+`unload` 이벤트의 경우에는 사용자가 페이지를 떠날 때, 즉 모든 리소스들이 unload 될 때 실행됩니다
 
 ```html
 <head> </head>
@@ -42,6 +45,19 @@ summary: 'DOMContentLoaded와 load 이벤트에 대해서 정리한 글입니다
 
     window.addEventListener('unload', () => {
       console.log('unload')
+    })
+  </script>
+</body>
+```
+
+`beforeunload` 이벤트의 사용자가 페이지를 나가기 전에 실행되기 때문에, 페이지를 벗어나기 전에 사용자가 입력한 정보를 저장하지 않은 경우, 알림을 주는 용도로 사용할 수 있습니다.
+
+```html
+<head> </head>
+<body>
+  <script>
+    window.addEventListener('beforeunload', () => {
+      return alert('입력한 정보가 저장되지 않았습니다.')
     })
   </script>
 </body>
