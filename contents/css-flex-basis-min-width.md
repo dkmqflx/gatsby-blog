@@ -30,7 +30,7 @@ summary: 'flex-basis가 적용되지 않을 때 해결하는 방법 에 대해�
 
 ---
 
-### min-widt: 0 으로 설정하기
+### min-width: 0 으로 설정하기
 
 이를 해결하는 첫번째 방법으로는 flex item에 `min-width`을 `0`으로 직접 설정하는 것입니다. <br/>
 아래처럼 `min-width`을 `0`를 설정해주면, 최소 너비가 contents에 맞춰지지 않기 때문에 `flex-basis` 값을 줄일 때마다 Input 창의 크기 또한 계속해서 줄어드는 것을 확인할 수 있습니다.
