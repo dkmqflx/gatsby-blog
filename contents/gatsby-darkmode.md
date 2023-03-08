@@ -42,7 +42,7 @@ body.dark {
 ```
 
 이렇게 선언한 파일을 `gatsby-browser.js`에 import 해줍니다. <br/>
-`gatsby-browser.js` 은 browser 내의 gatsby 관련해서 일어나는 이벤트를 일어나는 담당하는 파일로, `gatsby-browser.js` 에 필요한 css파일을 import 해주면 전역적으로 필요한 스티일을 적용해줄 수 있습니다.
+`gatsby-browser.js` 은 browser 내의 gatsby 관련해서 일어나는 이벤트를 담당하는 파일로, `gatsby-browser.js` 에 필요한 css파일을 import 해주면 전역적으로 필요한 스티일을 적용해줄 수 있습니다.
 
 ```js
 // gatsby-browser.js
@@ -52,7 +52,7 @@ import './src/styles/global.css'
 
 그리고 나서 Custom hook을 정의해줍니다. Custom hook에는 테마가 변경될 때 마다 해당하는 테마에 맞는 class이름을 추가해주고, 이전에 있던 class 이름을 제거해주는 방식으로 테마를 변경시켜주는 toggleTheme함수를 정의해줍니다.
 
-```tsx
+```js
 // hooks/useTheme.tsx
 import { useState } from 'react'
 
@@ -87,7 +87,7 @@ export default useTheme
 
 이렇게 정의한 Custom hook을 테마를 바꾸는 곳에 불러와서 사용합니다. 아래 코드처럼 테마를 바꾸는 버튼을 클릭하면 테마가 변경되고 선택한 테마에 맞는 버튼이 화면에 나타납니다.
 
-```ts
+```js
 // pages/index.tsx
 import React from 'react'
 import useTheme from '../hooks/useTheme'
@@ -117,7 +117,7 @@ export default IndexPage
 
 아래처럼 테마를 변경할 때 마다 `localStorage.setItem`을 사용해서 Local Storage에 변경된 테마를 저장해줍니다. 그리고 useEffect hook에 `localStorage.getItem`을 사용해서 블로그를 접속했을 때 저장된 테마가 있다면 해당하는 테마를 적용시켜 줍니다.
 
-```tsx
+```js
 import { useEffect, useState } from 'react'
 
 const useTheme = () => {
@@ -168,7 +168,7 @@ export default useTheme
 
 아래와 같이 기본 시스템 테마를 확인하고 해당하는 테마가 적용되도록 useEffect hook 코드를 수정해줍니다.
 
-```tsx
+```js
 // hooks/useTheme.tsx
 ...
 
@@ -269,7 +269,7 @@ useEffect(() => {
 
 theme를 변경시킬 수 있는 context와 theme 값을 받아올 수 있는 context를 만든다음 context를 반환해줍니다.
 
-```tsx
+```js
 // hooks/useTheme.tsx
 import { useEffect, useState, createContext } from 'react'
 
@@ -317,7 +317,7 @@ export default useTheme
 
 그리고 테마를 변경하는 버튼이 있는 곳에서 Provider의 value로 theme 값과 theme를 변경시킬 수 있는 함수를 전달해줍니다
 
-```tsx
+```js
 // pages/index.tsx
 import React from 'react'
 import useTheme from '../hooks/useTheme'
@@ -349,7 +349,7 @@ export default IndexPage
 
 댓글이 구현된 컴포넌트에서 useContext을 사용해서 필요한 테마를 가져온 다음, useEffect를 사용해서 theme 값이 변경될 때마다 해당하는 테마가 댓글에도 적용될 수 있도록 처리해줍니다. 댓클이 구현된 코드의 컴포넌트는 아래와 같습니다
 
-```tsx
+```js
 // components/Utterance.tsx
 
 ...
