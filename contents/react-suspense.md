@@ -33,10 +33,7 @@ import { useState, useEffect } from 'react'
 
 function App() {
   return (
-    <>
       <Users />
-      <Posts />
-    </>
   )
 }
 
@@ -63,6 +60,7 @@ function Users() {
         {users.map(({ id, name }) => (
           <li key={id}>{name}</li>
         ))}
+        <Posts />
       </ul>
     </div>
   )
@@ -115,9 +113,7 @@ import { useState, useEffect } from 'react'
 
 function App() {
   return (
-    <>
       <Users />
-    </>
   )
 }
 
