@@ -41,7 +41,7 @@ console.log(map.get(id2)) // undefined
 console.log(id1 === id2) // false
 ```
 
-Symbol이 유일한 값을 가지는 특징을 아래 코드에서도 확인할 수 있습니다. obj의 `[Symbol('id')]`로 Symbol을 key로 갖는 프로퍼티를 추가해주었습다. 하지만 이 때 `[Symbol('id')]`로 obj에 외부에서 접근하려고 하면 undefined가 출력되는데 그 이유는 objdml `[Symbol('id')]`과 console.log의 `[Symbol('id')]`은 서로 다른 Symbol이기 때문입니다
+Symbol이 유일한 값을 가지는 특징을 아래 코드에서도 확인할 수 있습니다. obj의 `[Symbol('id')]`로 Symbol을 key로 갖는 프로퍼티를 추가해주었습다. 하지만 이 때 `[Symbol('id')]`로 obj에 외부에서 접근하려고 하면 undefined가 출력되는데 그 이유는 obj의 `[Symbol('id')]`과 console.log의 `[Symbol('id')]`은 서로 다른 Symbol이기 때문입니다
 
 ```js
 const obj = { id: 'this is id', [Symbol('id')]: 'this is symbol id' }
