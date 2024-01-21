@@ -5,7 +5,7 @@ categories: ['ETC']
 summary: 'TSDoc과 Todo Tree를 활용해서 주석을 작성하는 방법에 대해 작성한 글입니다.'
 ---
 
-## 들어가기 앞서
+## 들어가기에 앞서
 
 개발을 시작한지 얼마 되지 않았을 때는 “주석이 필요 없는 코드가 좋은 코드”라는 생각에 주석을 작성하는 것에 대해서 부정적인 입장을 가지고 있었습니다.
 
@@ -18,6 +18,8 @@ summary: 'TSDoc과 Todo Tree를 활용해서 주석을 작성하는 방법에 �
 개인적으로 주석을 작성하는데 도움을 얻었던 도구와 어떠한 상황에서 주석을 작성했는지에 대해 공유하고자 합니다.
 
 <br/>
+
+--
 
 ## TSDoc
 
@@ -47,7 +49,9 @@ function getAverage(x: number, y: number): number {
 
 함수를 사용하는 곳에서도 함수가 작성된 파일에 이동해서 직접 주석을 확인할 필요 없이 함수 위에 마우스를 hover만 해도 작성된 주석을 확인할 수 있습니다.
 
-<img src="./images/etc-comments/etc-comments-01.png" alt="" />
+![](./images/etc-comments/etc-comments-01.png)
+
+<br/>
 
 반복적으로 사용되는 로직은 불필요한 코드 중복을 막기 위해 공통의 유틸 함수로 정의하는 경우가 많습니다. 만약 내부 로직이 복잡하거나 작동 원리를 한눈에 파악하기 어려운 경우에는 이렇게 주석을 통해 사용하는 방법을 함께 작성해준다면 사용하는 입장에서는 해당하는 유틸 함수의 역할을 쉽게 파악할 수 있다는 장점이 있습니다.
 
@@ -72,11 +76,15 @@ export type Product = {
 
 이렇게 주석을 작성해주면 Product 타입을 사용하는 곳에서 마우스를 hover 해도 마크다운으로 작성된 정보를 확인할 수 있습니다.
 
-<img src="./images/etc-comments/etc-comments-02.png" alt="" />
+![](./images/etc-comments/etc-comments-02.png)
+
+<br/>
 
 그리고 Product 타입 내부를 보면 각 속성위에 주석이 작성되어 있는데요, 이렇게 주석을 작성하면 해당 타입을 사용하는 곳에서 속성에 접근할 때 주석으로 작성된 내용을 확인할 수 있습니다.
 
-<img src="./images/etc-comments/etc-comments-03.png" alt="" />
+![](./images/etc-comments/etc-comments-03.png)
+
+<br/>
 
 개인적으로는 API Response에 대한 타입을 정의할 때 주석을 적극적으로 사용하는 편인데요, 특히 변수명만 보고는 어떤 response인지 유추하기 힘든 경우에 이런식으로 마크다운과 주석을 함께 사용하면 해당 변수가 대한 정보를 쉽게 알아볼 수 있습니다.
 
@@ -96,11 +104,15 @@ Todo Tree 사용하기 위해 우선 VSCode에서 익스텐션을 설치한 다�
 
 이렇게 태그를 등록한 다음, 등록된 태그를 사용해서 주석을 작성하면 태그의 배경색이 강조된 것을 확인할 수 있습니다.
 
-<img src="./images/etc-comments/etc-comments-04.png" alt="" />
+![](./images/etc-comments/etc-comments-04.png)
+
+<br/>
 
 왼쪽 사이드바에 있는 Todo Tree 익스텐션 아이콘을 클릭하면 작성된 주석들을 태그별로 확인할 수 있습니다. 그리고 특정 태그만 필터링해서 확인할 수도 있습니다.
 
-<img src="./images/etc-comments/etc-comments-05.png" alt="" />
+![](./images/etc-comments/etc-comments-05.png)
+
+<br/>
 
 추가적으로 태그를 한 눈데 더 쉽게 파악할 수 있게 background 색상이나 아이콘을 추가할 수 있는데요, 아래와 같이 옵션을 추가하면 이전에 작성된 TODO 트리의 글자 배경색이 변경되고 아이콘이 추가된 것을 확인할 수 있습니다.
 
@@ -117,9 +129,11 @@ Todo Tree 사용하기 위해 우선 VSCode에서 익스텐션을 설치한 다�
 }
 ```
 
-<img src="./images/etc-comments/etc-comments-06.png" alt="" />
+![](./images/etc-comments/etc-comments-06.png)
 
 <br/>
+
+---
 
 ## 결론
 
