@@ -60,20 +60,63 @@ $ npx @svgr/cli <아이콘 파일 경로> --out-dir ./src/icons --filename-case 
 
 다양한 옵션들을 이렇게 하나씩 지정하는 대신 아래와 같이 configuration 파일을 통해서 한번에 필요한 옵션들을 지정해줄 수 있습니다.
 
-```json
-// svgr-config.json
+```js
+// .svgrrc.js
 
-{
-  "typescript": true,
-  "outDir": "./src/Icons",
-  "filenameCase": "pascal"
+module.exports = {
+  typescript: true,
+  outDir: './src/Icons',
+  filenameCase: 'pascal',
+  ignoreExisting: true,
 }
 ```
 
 그리고 아래처럼 `-—config-file`이라는 옵션을 사용해서 configuration 파일을 실행해줍니다.
 
+추가적으로 외부에서 props를 통해서 아이콘을 변경하고 싶다면 아래와 같이 svgProps에 width와 height라는 속성을 전달받을 수 있도록 합니다.
+
+```js
+const DEFAULT_GRAY_COLOR = `#808080`
+
+module.exports = {
+  typescript: true,
+  svgProps: {
+    width: '{props.width ?? 24}',
+    height: '{props.height ?? 24}',
+  },
+
+  outDir: './src/Icons',
+  filenameCase: 'pascal',
+  dimensions: false,
+  ignoreExisting: true,
+}
+```
+
+기본적으로 svg 아이콘은 fill 속성을 사용해서 아이콘의 색상이 정해집니다.
+
+기본 아이콘 색상이 fill 속성에 따라 정해져 있지만 서비스에 따라 기본 아이콘의 색상을 변경하고 싶다면 아래와 같이 replaceAttrValues 옵션을 사용해서 color 속성을 전달받을 수 있도록 해줍니다
+
+```js
+const DEFAULT_ICON_COLOR = `#808080`
+
+module.exports = {
+  typescript: true,
+  svgProps: {
+    width: '{props.width ?? 24}',
+    height: '{props.height ?? 24}',
+  },
+  replaceAttrValues: {
+    [DEFAULT_ICON_COLOR]: `{props.color ?? "${DEFAULT_ICON_COLOR}"}`,
+  },
+  outDir: './src/Icons',
+  filenameCase: 'pascal',
+  dimensions: false,
+  ignoreExisting: true,
+}
+```
+
 ```bash
-$ npx @svgr/cli <아이콘 파일 경로> --config-file ./svgr-config.json
+$ npx @svgr/cli <아이콘 파일 경로> --config-file ./.svgrrc.js
 ```
 
 더 많은 option들은 [공식문서](https://react-svgr.com/docs/options/)에서 확인할 수 있습니다.
